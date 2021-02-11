@@ -1,0 +1,3594 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.2.1 Thu Jul 16 10:28:17 2020
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc93600
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _set_bkg_tiles
+                             13 	.globl _set_bkg_data
+                             14 	.globl _wait_vbl_done
+                             15 	.globl _joypad
+                             16 	.globl _ocarinagb_map
+                             17 	.globl _ocarinagb_data
+                             18 	.globl _main
+                             19 ;--------------------------------------------------------
+                             20 ; Externals used
+                             21 ;--------------------------------------------------------
+                             22 	.globl _IE_REG
+                             23 	.globl _SVBK_REG
+                             24 	.globl _OCPD_REG
+                             25 	.globl _OCPS_REG
+                             26 	.globl _BCPD_REG
+                             27 	.globl _BCPS_REG
+                             28 	.globl _RP_REG
+                             29 	.globl _HDMA5_REG
+                             30 	.globl _HDMA4_REG
+                             31 	.globl _HDMA3_REG
+                             32 	.globl _HDMA2_REG
+                             33 	.globl _HDMA1_REG
+                             34 	.globl _VBK_REG
+                             35 	.globl _KEY1_REG
+                             36 	.globl _WX_REG
+                             37 	.globl _WY_REG
+                             38 	.globl _OBP1_REG
+                             39 	.globl _OBP0_REG
+                             40 	.globl _BGP_REG
+                             41 	.globl _DMA_REG
+                             42 	.globl _LYC_REG
+                             43 	.globl _LY_REG
+                             44 	.globl _SCX_REG
+                             45 	.globl _SCY_REG
+                             46 	.globl _STAT_REG
+                             47 	.globl _LCDC_REG
+                             48 	.globl _NR52_REG
+                             49 	.globl _NR51_REG
+                             50 	.globl _NR50_REG
+                             51 	.globl _NR44_REG
+                             52 	.globl _NR43_REG
+                             53 	.globl _NR42_REG
+                             54 	.globl _NR41_REG
+                             55 	.globl _NR34_REG
+                             56 	.globl _NR33_REG
+                             57 	.globl _NR32_REG
+                             58 	.globl _NR31_REG
+                             59 	.globl _NR30_REG
+                             60 	.globl _NR24_REG
+                             61 	.globl _NR23_REG
+                             62 	.globl _NR22_REG
+                             63 	.globl _NR21_REG
+                             64 	.globl _NR14_REG
+                             65 	.globl _NR13_REG
+                             66 	.globl _NR12_REG
+                             67 	.globl _NR11_REG
+                             68 	.globl _NR10_REG
+                             69 	.globl _IF_REG
+                             70 	.globl _TAC_REG
+                             71 	.globl _TMA_REG
+                             72 	.globl _TIMA_REG
+                             73 	.globl _DIV_REG
+                             74 	.globl _SC_REG
+                             75 	.globl _SB_REG
+                             76 	.globl _P1_REG
+                             77 	.globl __io_out
+                             78 	.globl __io_in
+                             79 	.globl __io_status
+                             80 	.globl _sys_time
+                             81 	.globl __cpu
+                             82 ;--------------------------------------------------------
+                             83 ; special function registers
+                             84 ;--------------------------------------------------------
+                             85 ;--------------------------------------------------------
+                             86 ; special function bits 
+                             87 ;--------------------------------------------------------
+                             88 ;--------------------------------------------------------
+                             89 ; internal ram data
+                             90 ;--------------------------------------------------------
+                             91 	.area _DATA
+                             92 ;--------------------------------------------------------
+                             93 ; overlayable items in internal ram 
+                             94 ;--------------------------------------------------------
+                             95 	.area _OVERLAY
+                             96 ;--------------------------------------------------------
+                             97 ; indirectly addressable internal ram data
+                             98 ;--------------------------------------------------------
+                             99 	.area _ISEG
+                            100 ;--------------------------------------------------------
+                            101 ; bit data
+                            102 ;--------------------------------------------------------
+                            103 	.area _BSEG
+                            104 ;--------------------------------------------------------
+                            105 ; external ram data
+                            106 ;--------------------------------------------------------
+                            107 	.area _XSEG
+                            108 ;--------------------------------------------------------
+                            109 ; global & static initialisations
+                            110 ;--------------------------------------------------------
+                            111 	.area _GSINIT
+                            112 	.area _GSFINAL
+                            113 	.area _GSINIT
+                            114 ;--------------------------------------------------------
+                            115 ; Home
+                            116 ;--------------------------------------------------------
+                            117 	.area _HOME
+                            118 	.area _CODE
+                            119 ;--------------------------------------------------------
+                            120 ; code
+                            121 ;--------------------------------------------------------
+                            122 	.area _CODE
+                            123 ;	main.c 6
+                            124 ; genLabel
+                            125 ; genFunction
+                            126 ;	---------------------------------
+                            127 ; Function main
+                            128 ; ---------------------------------
+   0000                     129 ___main_start:
+   0000                     130 _main:
+   0000 C5                  131 	push	bc
+                            132 	
+                            133 ;	main.c 8
+                            134 ; genAssign
+                            135 ; AOP_SFR for _NR52_REG
+   0001 3E 80               136 	ld	a,#0x80
+   0003 E0 00               137 	ldh	(_NR52_REG+0),a
+                            138 ;	main.c 9
+                            139 ; genAssign
+                            140 ; AOP_SFR for _NR50_REG
+   0005 3E 77               141 	ld	a,#0x77
+   0007 E0 00               142 	ldh	(_NR50_REG+0),a
+                            143 ;	main.c 10
+                            144 ; genAssign
+                            145 ; AOP_SFR for _NR51_REG
+   0009 3E FF               146 	ld	a,#0xFF
+   000B E0 00               147 	ldh	(_NR51_REG+0),a
+                            148 ;	main.c 11
+                            149 ; genIpush
+   000D 21 F6 00            150 	ld	hl,#_ocarinagb_data + 0
+   0010 E5                  151 	push	hl
+                            152 ; genIpush
+   0011 3E AB               153 	ld	a,#0xAB
+   0013 F5                  154 	push	af
+   0014 33                  155 	inc	sp
+                            156 ; genIpush
+   0015 3E 00               157 	ld	a,#0x00
+   0017 F5                  158 	push	af
+   0018 33                  159 	inc	sp
+                            160 ; genCall
+   0019 CD 00 00            161 	call	_set_bkg_data
+   001C E8 04               162 	lda	sp,4(sp)
+                            163 ;	main.c 12
+                            164 ; genIpush
+   001E 21 A6 0B            165 	ld	hl,#_ocarinagb_map + 0
+   0021 E5                  166 	push	hl
+                            167 ; genIpush
+   0022 3E 12               168 	ld	a,#0x12
+   0024 F5                  169 	push	af
+   0025 33                  170 	inc	sp
+                            171 ; genIpush
+   0026 3E 14               172 	ld	a,#0x14
+   0028 F5                  173 	push	af
+   0029 33                  174 	inc	sp
+                            175 ; genIpush
+   002A 3E 00               176 	ld	a,#0x00
+   002C F5                  177 	push	af
+   002D 33                  178 	inc	sp
+                            179 ; genIpush
+   002E 3E 00               180 	ld	a,#0x00
+   0030 F5                  181 	push	af
+   0031 33                  182 	inc	sp
+                            183 ; genCall
+   0032 CD 00 00            184 	call	_set_bkg_tiles
+   0035 E8 06               185 	lda	sp,6(sp)
+                            186 ;	main.c 13
+                            187 ; genOr
+                            188 ; AOP_SFR for _LCDC_REG
+                            189 ; Type res[4] = l[4]&r[1]
+                            190 ; Size res[1] = l[1]&r[1]
+   0037 F0 00               191 	ldh	a,(_LCDC_REG+0) ; x
+   0039 F6 01               192 	or	a,#0x01
+   003B E0 00               193 	ldh	(_LCDC_REG+0),a
+                            194 ;	main.c 14
+                            195 ; genOr
+                            196 ; AOP_SFR for _LCDC_REG
+                            197 ; Type res[4] = l[4]&r[1]
+                            198 ; Size res[1] = l[1]&r[1]
+   003D F0 00               199 	ldh	a,(_LCDC_REG+0) ; x
+   003F F6 80               200 	or	a,#0x80
+   0041 E0 00               201 	ldh	(_LCDC_REG+0),a
+                            202 ;	main.c 15
+                            203 ; genLabel
+   0043                     204 00116$:
+                            205 ;	main.c 16
+                            206 ; genCall
+   0043 CD 00 00            207 	call	_joypad
+   0046 4B                  208 	ld	c,e
+                            209 ; genAnd
+   0047 79                  210 	ld	a,c
+   0048 CB 67               211 	bit	4,a
+   004A CA 6D 00            212 	jp	z,00113$
+                            213 ;	main.c 24
+                            214 ; genAssign
+                            215 ; AOP_SFR for _NR10_REG
+   004D 3E 00               216 	ld	a,#0x00
+   004F E0 00               217 	ldh	(_NR10_REG+0),a
+                            218 ;	main.c 31
+                            219 ; genAssign
+                            220 ; AOP_SFR for _NR11_REG
+   0051 3E 81               221 	ld	a,#0x81
+   0053 E0 00               222 	ldh	(_NR11_REG+0),a
+                            223 ;	main.c 40
+                            224 ; genAssign
+                            225 ; AOP_SFR for _NR12_REG
+   0055 3E 43               226 	ld	a,#0x43
+   0057 E0 00               227 	ldh	(_NR12_REG+0),a
+                            228 ;	main.c 45
+                            229 ; genAssign
+                            230 ; AOP_SFR for _NR13_REG
+   0059 3E 42               231 	ld	a,#0x42
+   005B E0 00               232 	ldh	(_NR13_REG+0),a
+                            233 ;	main.c 54
+                            234 ; genAssign
+                            235 ; AOP_SFR for _NR14_REG
+   005D 3E 86               236 	ld	a,#0x86
+   005F E0 00               237 	ldh	(_NR14_REG+0),a
+                            238 ;	main.c 56
+                            239 ; genCall
+   0061 CD 00 00            240 	call	_wait_vbl_done
+                            241 ;	main.c 57
+                            242 ; genCall
+   0064 CD 00 00            243 	call	_wait_vbl_done
+                            244 ;	main.c 58
+                            245 ; genCall
+   0067 CD 00 00            246 	call	_wait_vbl_done
+                            247 ; genGoto
+   006A C3 EE 00            248 	jp	00114$
+                            249 ; genLabel
+   006D                     250 00113$:
+                            251 ;	main.c 59
+                            252 ; genCall
+   006D CD 00 00            253 	call	_joypad
+   0070 4B                  254 	ld	c,e
+                            255 ; genAnd
+   0071 79                  256 	ld	a,c
+   0072 CB 5F               257 	bit	3,a
+   0074 CA 8E 00            258 	jp	z,00110$
+                            259 ;	main.c 66
+                            260 ; genAssign
+                            261 ; AOP_SFR for _NR10_REG
+   0077 3E 00               262 	ld	a,#0x00
+   0079 E0 00               263 	ldh	(_NR10_REG+0),a
+                            264 ;	main.c 73
+                            265 ; genAssign
+                            266 ; AOP_SFR for _NR11_REG
+   007B 3E 81               267 	ld	a,#0x81
+   007D E0 00               268 	ldh	(_NR11_REG+0),a
+                            269 ;	main.c 82
+                            270 ; genAssign
+                            271 ; AOP_SFR for _NR12_REG
+   007F 3E 43               272 	ld	a,#0x43
+   0081 E0 00               273 	ldh	(_NR12_REG+0),a
+                            274 ;	main.c 87
+                            275 ; genAssign
+                            276 ; AOP_SFR for _NR13_REG
+   0083 3E 89               277 	ld	a,#0x89
+   0085 E0 00               278 	ldh	(_NR13_REG+0),a
+                            279 ;	main.c 96
+                            280 ; genAssign
+                            281 ; AOP_SFR for _NR14_REG
+   0087 3E 86               282 	ld	a,#0x86
+   0089 E0 00               283 	ldh	(_NR14_REG+0),a
+                            284 ; genGoto
+   008B C3 EE 00            285 	jp	00114$
+                            286 ; genLabel
+   008E                     287 00110$:
+                            288 ;	main.c 97
+                            289 ; genCall
+   008E CD 00 00            290 	call	_joypad
+   0091 4B                  291 	ld	c,e
+                            292 ; genAnd
+   0092 79                  293 	ld	a,c
+   0093 CB 47               294 	bit	0,a
+   0095 CA AF 00            295 	jp	z,00107$
+                            296 ;	main.c 104
+                            297 ; genAssign
+                            298 ; AOP_SFR for _NR10_REG
+   0098 3E 00               299 	ld	a,#0x00
+   009A E0 00               300 	ldh	(_NR10_REG+0),a
+                            301 ;	main.c 111
+                            302 ; genAssign
+                            303 ; AOP_SFR for _NR11_REG
+   009C 3E 81               304 	ld	a,#0x81
+   009E E0 00               305 	ldh	(_NR11_REG+0),a
+                            306 ;	main.c 120
+                            307 ; genAssign
+                            308 ; AOP_SFR for _NR12_REG
+   00A0 3E 43               309 	ld	a,#0x43
+   00A2 E0 00               310 	ldh	(_NR12_REG+0),a
+                            311 ;	main.c 125
+                            312 ; genAssign
+                            313 ; AOP_SFR for _NR13_REG
+   00A4 3E D6               314 	ld	a,#0xD6
+   00A6 E0 00               315 	ldh	(_NR13_REG+0),a
+                            316 ;	main.c 134
+                            317 ; genAssign
+                            318 ; AOP_SFR for _NR14_REG
+   00A8 3E 86               319 	ld	a,#0x86
+   00AA E0 00               320 	ldh	(_NR14_REG+0),a
+                            321 ; genGoto
+   00AC C3 EE 00            322 	jp	00114$
+                            323 ; genLabel
+   00AF                     324 00107$:
+                            325 ;	main.c 135
+                            326 ; genCall
+   00AF CD 00 00            327 	call	_joypad
+   00B2 4B                  328 	ld	c,e
+                            329 ; genAnd
+   00B3 79                  330 	ld	a,c
+   00B4 CB 4F               331 	bit	1,a
+   00B6 CA D0 00            332 	jp	z,00104$
+                            333 ;	main.c 142
+                            334 ; genAssign
+                            335 ; AOP_SFR for _NR10_REG
+   00B9 3E 00               336 	ld	a,#0x00
+   00BB E0 00               337 	ldh	(_NR10_REG+0),a
+                            338 ;	main.c 149
+                            339 ; genAssign
+                            340 ; AOP_SFR for _NR11_REG
+   00BD 3E 81               341 	ld	a,#0x81
+   00BF E0 00               342 	ldh	(_NR11_REG+0),a
+                            343 ;	main.c 158
+                            344 ; genAssign
+                            345 ; AOP_SFR for _NR12_REG
+   00C1 3E 43               346 	ld	a,#0x43
+   00C3 E0 00               347 	ldh	(_NR12_REG+0),a
+                            348 ;	main.c 163
+                            349 ; genAssign
+                            350 ; AOP_SFR for _NR13_REG
+   00C5 3E F7               351 	ld	a,#0xF7
+   00C7 E0 00               352 	ldh	(_NR13_REG+0),a
+                            353 ;	main.c 172
+                            354 ; genAssign
+                            355 ; AOP_SFR for _NR14_REG
+   00C9 3E 86               356 	ld	a,#0x86
+   00CB E0 00               357 	ldh	(_NR14_REG+0),a
+                            358 ; genGoto
+   00CD C3 EE 00            359 	jp	00114$
+                            360 ; genLabel
+   00D0                     361 00104$:
+                            362 ;	main.c 173
+                            363 ; genCall
+   00D0 CD 00 00            364 	call	_joypad
+   00D3 4B                  365 	ld	c,e
+                            366 ; genAnd
+   00D4 79                  367 	ld	a,c
+   00D5 CB 57               368 	bit	2,a
+   00D7 CA EE 00            369 	jp	z,00114$
+                            370 ;	main.c 180
+                            371 ; genAssign
+                            372 ; AOP_SFR for _NR10_REG
+   00DA 3E 00               373 	ld	a,#0x00
+   00DC E0 00               374 	ldh	(_NR10_REG+0),a
+                            375 ;	main.c 187
+                            376 ; genAssign
+                            377 ; AOP_SFR for _NR11_REG
+   00DE 3E 81               378 	ld	a,#0x81
+   00E0 E0 00               379 	ldh	(_NR11_REG+0),a
+                            380 ;	main.c 196
+                            381 ; genAssign
+                            382 ; AOP_SFR for _NR12_REG
+   00E2 3E 43               383 	ld	a,#0x43
+   00E4 E0 00               384 	ldh	(_NR12_REG+0),a
+                            385 ;	main.c 201
+                            386 ; genAssign
+                            387 ; AOP_SFR for _NR13_REG
+   00E6 3E 21               388 	ld	a,#0x21
+   00E8 E0 00               389 	ldh	(_NR13_REG+0),a
+                            390 ;	main.c 210
+                            391 ; genAssign
+                            392 ; AOP_SFR for _NR14_REG
+   00EA 3E 87               393 	ld	a,#0x87
+   00EC E0 00               394 	ldh	(_NR14_REG+0),a
+                            395 ; genLabel
+   00EE                     396 00114$:
+                            397 ;	main.c 214
+                            398 ; genCall
+   00EE CD 00 00            399 	call	_wait_vbl_done
+                            400 ; genGoto
+   00F1 C3 43 00            401 	jp	00116$
+                            402 ; genLabel
+   00F4                     403 00118$:
+                            404 ; genEndFunction
+                            405 	
+   00F4 C1                  406 	pop	bc
+   00F5 C9                  407 	ret
+   00F6                     408 ___main_end:
+   00F6                     409 _ocarinagb_data:
+   00F6 00                  410 	.db #0x00
+   00F7 00                  411 	.db #0x00
+   00F8 00                  412 	.db #0x00
+   00F9 00                  413 	.db #0x00
+   00FA 00                  414 	.db #0x00
+   00FB 00                  415 	.db #0x00
+   00FC 00                  416 	.db #0x00
+   00FD 00                  417 	.db #0x00
+   00FE 00                  418 	.db #0x00
+   00FF 00                  419 	.db #0x00
+   0100 00                  420 	.db #0x00
+   0101 00                  421 	.db #0x00
+   0102 00                  422 	.db #0x00
+   0103 00                  423 	.db #0x00
+   0104 00                  424 	.db #0x00
+   0105 00                  425 	.db #0x00
+   0106 00                  426 	.db #0x00
+   0107 00                  427 	.db #0x00
+   0108 00                  428 	.db #0x00
+   0109 00                  429 	.db #0x00
+   010A 00                  430 	.db #0x00
+   010B 00                  431 	.db #0x00
+   010C 00                  432 	.db #0x00
+   010D 00                  433 	.db #0x00
+   010E 00                  434 	.db #0x00
+   010F 00                  435 	.db #0x00
+   0110 00                  436 	.db #0x00
+   0111 00                  437 	.db #0x00
+   0112 04                  438 	.db #0x04
+   0113 03                  439 	.db #0x03
+   0114 30                  440 	.db #0x30
+   0115 0F                  441 	.db #0x0F
+   0116 00                  442 	.db #0x00
+   0117 00                  443 	.db #0x00
+   0118 00                  444 	.db #0x00
+   0119 00                  445 	.db #0x00
+   011A 00                  446 	.db #0x00
+   011B 00                  447 	.db #0x00
+   011C 06                  448 	.db #0x06
+   011D 01                  449 	.db #0x01
+   011E 30                  450 	.db #0x30
+   011F 0F                  451 	.db #0x0F
+   0120 87                  452 	.db #0x87
+   0121 78                  453 	.db #0x78
+   0122 0F                  454 	.db #0x0F
+   0123 F0                  455 	.db #0xF0
+   0124 FF                  456 	.db #0xFF
+   0125 00                  457 	.db #0x00
+   0126 00                  458 	.db #0x00
+   0127 00                  459 	.db #0x00
+   0128 0C                  460 	.db #0x0C
+   0129 03                  461 	.db #0x03
+   012A C0                  462 	.db #0xC0
+   012B 3F                  463 	.db #0x3F
+   012C 00                  464 	.db #0x00
+   012D FF                  465 	.db #0xFF
+   012E 00                  466 	.db #0x00
+   012F FF                  467 	.db #0xFF
+   0130 E0                  468 	.db #0xE0
+   0131 1F                  469 	.db #0x1F
+   0132 E0                  470 	.db #0xE0
+   0133 1F                  471 	.db #0x1F
+   0134 E0                  472 	.db #0xE0
+   0135 1F                  473 	.db #0x1F
+   0136 E0                  474 	.db #0xE0
+   0137 1F                  475 	.db #0x1F
+   0138 00                  476 	.db #0x00
+   0139 FF                  477 	.db #0xFF
+   013A 00                  478 	.db #0x00
+   013B FF                  479 	.db #0xFF
+   013C 00                  480 	.db #0x00
+   013D FF                  481 	.db #0xFF
+   013E 00                  482 	.db #0x00
+   013F FF                  483 	.db #0xFF
+   0140 00                  484 	.db #0x00
+   0141 FF                  485 	.db #0xFF
+   0142 00                  486 	.db #0x00
+   0143 FF                  487 	.db #0xFF
+   0144 00                  488 	.db #0x00
+   0145 FF                  489 	.db #0xFF
+   0146 10                  490 	.db #0x10
+   0147 E0                  491 	.db #0xE0
+   0148 00                  492 	.db #0x00
+   0149 F0                  493 	.db #0xF0
+   014A 00                  494 	.db #0x00
+   014B F0                  495 	.db #0xF0
+   014C 00                  496 	.db #0x00
+   014D F0                  497 	.db #0xF0
+   014E 00                  498 	.db #0x00
+   014F F0                  499 	.db #0xF0
+   0150 00                  500 	.db #0x00
+   0151 F0                  501 	.db #0xF0
+   0152 10                  502 	.db #0x10
+   0153 E0                  503 	.db #0xE0
+   0154 10                  504 	.db #0x10
+   0155 E0                  505 	.db #0xE0
+   0156 00                  506 	.db #0x00
+   0157 00                  507 	.db #0x00
+   0158 00                  508 	.db #0x00
+   0159 00                  509 	.db #0x00
+   015A 00                  510 	.db #0x00
+   015B 00                  511 	.db #0x00
+   015C 04                  512 	.db #0x04
+   015D 00                  513 	.db #0x00
+   015E 0E                  514 	.db #0x0E
+   015F 01                  515 	.db #0x01
+   0160 06                  516 	.db #0x06
+   0161 01                  517 	.db #0x01
+   0162 C3                  518 	.db #0xC3
+   0163 00                  519 	.db #0x00
+   0164 E1                  520 	.db #0xE1
+   0165 00                  521 	.db #0x00
+   0166 00                  522 	.db #0x00
+   0167 00                  523 	.db #0x00
+   0168 00                  524 	.db #0x00
+   0169 00                  525 	.db #0x00
+   016A 00                  526 	.db #0x00
+   016B 00                  527 	.db #0x00
+   016C 00                  528 	.db #0x00
+   016D 00                  529 	.db #0x00
+   016E 80                  530 	.db #0x80
+   016F 00                  531 	.db #0x00
+   0170 20                  532 	.db #0x20
+   0171 C0                  533 	.db #0xC0
+   0172 88                  534 	.db #0x88
+   0173 70                  535 	.db #0x70
+   0174 C4                  536 	.db #0xC4
+   0175 38                  537 	.db #0x38
+   0176 00                  538 	.db #0x00
+   0177 00                  539 	.db #0x00
+   0178 00                  540 	.db #0x00
+   0179 00                  541 	.db #0x00
+   017A 00                  542 	.db #0x00
+   017B 00                  543 	.db #0x00
+   017C 00                  544 	.db #0x00
+   017D 00                  545 	.db #0x00
+   017E 01                  546 	.db #0x01
+   017F 00                  547 	.db #0x00
+   0180 06                  548 	.db #0x06
+   0181 01                  549 	.db #0x01
+   0182 13                  550 	.db #0x13
+   0183 0C                  551 	.db #0x0C
+   0184 5F                  552 	.db #0x5F
+   0185 20                  553 	.db #0x20
+   0186 00                  554 	.db #0x00
+   0187 00                  555 	.db #0x00
+   0188 02                  556 	.db #0x02
+   0189 01                  557 	.db #0x01
+   018A 18                  558 	.db #0x18
+   018B 07                  559 	.db #0x07
+   018C 6F                  560 	.db #0x6F
+   018D 10                  561 	.db #0x10
+   018E 2F                  562 	.db #0x2F
+   018F D0                  563 	.db #0xD0
+   0190 7F                  564 	.db #0x7F
+   0191 80                  565 	.db #0x80
+   0192 FF                  566 	.db #0xFF
+   0193 00                  567 	.db #0x00
+   0194 FF                  568 	.db #0xFF
+   0195 00                  569 	.db #0x00
+   0196 8F                  570 	.db #0x8F
+   0197 70                  571 	.db #0x70
+   0198 3E                  572 	.db #0x3E
+   0199 C1                  573 	.db #0xC1
+   019A F8                  574 	.db #0xF8
+   019B 07                  575 	.db #0x07
+   019C F9                  576 	.db #0xF9
+   019D 07                  577 	.db #0x07
+   019E FB                  578 	.db #0xFB
+   019F 07                  579 	.db #0x07
+   01A0 FB                  580 	.db #0xFB
+   01A1 07                  581 	.db #0x07
+   01A2 FF                  582 	.db #0xFF
+   01A3 03                  583 	.db #0x03
+   01A4 FF                  584 	.db #0xFF
+   01A5 01                  585 	.db #0x01
+   01A6 CF                  586 	.db #0xCF
+   01A7 00                  587 	.db #0x00
+   01A8 2D                  588 	.db #0x2D
+   01A9 F0                  589 	.db #0xF0
+   01AA FE                  590 	.db #0xFE
+   01AB FC                  591 	.db #0xFC
+   01AC FD                  592 	.db #0xFD
+   01AD FE                  593 	.db #0xFE
+   01AE FE                  594 	.db #0xFE
+   01AF FF                  595 	.db #0xFF
+   01B0 FE                  596 	.db #0xFE
+   01B1 FF                  597 	.db #0xFF
+   01B2 FF                  598 	.db #0xFF
+   01B3 FF                  599 	.db #0xFF
+   01B4 FF                  600 	.db #0xFF
+   01B5 FF                  601 	.db #0xFF
+   01B6 A0                  602 	.db #0xA0
+   01B7 5F                  603 	.db #0x5F
+   01B8 80                  604 	.db #0x80
+   01B9 7F                  605 	.db #0x7F
+   01BA D0                  606 	.db #0xD0
+   01BB 2F                  607 	.db #0x2F
+   01BC 23                  608 	.db #0x23
+   01BD 5C                  609 	.db #0x5C
+   01BE 5F                  610 	.db #0x5F
+   01BF 20                  611 	.db #0x20
+   01C0 FE                  612 	.db #0xFE
+   01C1 01                  613 	.db #0x01
+   01C2 FC                  614 	.db #0xFC
+   01C3 03                  615 	.db #0x03
+   01C4 F8                  616 	.db #0xF8
+   01C5 07                  617 	.db #0x07
+   01C6 00                  618 	.db #0x00
+   01C7 FF                  619 	.db #0xFF
+   01C8 00                  620 	.db #0x00
+   01C9 FF                  621 	.db #0xFF
+   01CA 80                  622 	.db #0x80
+   01CB 7F                  623 	.db #0x7F
+   01CC 00                  624 	.db #0x00
+   01CD FF                  625 	.db #0xFF
+   01CE 00                  626 	.db #0x00
+   01CF FF                  627 	.db #0xFF
+   01D0 00                  628 	.db #0x00
+   01D1 FF                  629 	.db #0xFF
+   01D2 00                  630 	.db #0x00
+   01D3 FF                  631 	.db #0xFF
+   01D4 00                  632 	.db #0x00
+   01D5 FF                  633 	.db #0xFF
+   01D6 00                  634 	.db #0x00
+   01D7 E0                  635 	.db #0xE0
+   01D8 00                  636 	.db #0x00
+   01D9 E0                  637 	.db #0xE0
+   01DA 20                  638 	.db #0x20
+   01DB C0                  639 	.db #0xC0
+   01DC 00                  640 	.db #0x00
+   01DD C0                  641 	.db #0xC0
+   01DE 00                  642 	.db #0x00
+   01DF C0                  643 	.db #0xC0
+   01E0 40                  644 	.db #0x40
+   01E1 80                  645 	.db #0x80
+   01E2 00                  646 	.db #0x00
+   01E3 80                  647 	.db #0x80
+   01E4 00                  648 	.db #0x00
+   01E5 80                  649 	.db #0x80
+   01E6 F0                  650 	.db #0xF0
+   01E7 00                  651 	.db #0x00
+   01E8 F8                  652 	.db #0xF8
+   01E9 00                  653 	.db #0x00
+   01EA FC                  654 	.db #0xFC
+   01EB 00                  655 	.db #0x00
+   01EC FF                  656 	.db #0xFF
+   01ED 00                  657 	.db #0x00
+   01EE 1F                  658 	.db #0x1F
+   01EF 60                  659 	.db #0x60
+   01F0 4F                  660 	.db #0x4F
+   01F1 30                  661 	.db #0x30
+   01F2 0F                  662 	.db #0x0F
+   01F3 30                  663 	.db #0x30
+   01F4 23                  664 	.db #0x23
+   01F5 1C                  665 	.db #0x1C
+   01F6 E1                  666 	.db #0xE1
+   01F7 1E                  667 	.db #0x1E
+   01F8 F0                  668 	.db #0xF0
+   01F9 0F                  669 	.db #0x0F
+   01FA 78                  670 	.db #0x78
+   01FB 07                  671 	.db #0x07
+   01FC 7C                  672 	.db #0x7C
+   01FD 03                  673 	.db #0x03
+   01FE FE                  674 	.db #0xFE
+   01FF 01                  675 	.db #0x01
+   0200 FF                  676 	.db #0xFF
+   0201 00                  677 	.db #0x00
+   0202 FF                  678 	.db #0xFF
+   0203 00                  679 	.db #0x00
+   0204 FF                  680 	.db #0xFF
+   0205 00                  681 	.db #0x00
+   0206 00                  682 	.db #0x00
+   0207 00                  683 	.db #0x00
+   0208 80                  684 	.db #0x80
+   0209 00                  685 	.db #0x00
+   020A 00                  686 	.db #0x00
+   020B C0                  687 	.db #0xC0
+   020C 10                  688 	.db #0x10
+   020D E0                  689 	.db #0xE0
+   020E 08                  690 	.db #0x08
+   020F F0                  691 	.db #0xF0
+   0210 00                  692 	.db #0x00
+   0211 FC                  693 	.db #0xFC
+   0212 81                  694 	.db #0x81
+   0213 7E                  695 	.db #0x7E
+   0214 C0                  696 	.db #0xC0
+   0215 3F                  697 	.db #0x3F
+   0216 00                  698 	.db #0x00
+   0217 00                  699 	.db #0x00
+   0218 00                  700 	.db #0x00
+   0219 00                  701 	.db #0x00
+   021A 00                  702 	.db #0x00
+   021B 00                  703 	.db #0x00
+   021C 00                  704 	.db #0x00
+   021D 00                  705 	.db #0x00
+   021E 00                  706 	.db #0x00
+   021F 00                  707 	.db #0x00
+   0220 00                  708 	.db #0x00
+   0221 00                  709 	.db #0x00
+   0222 00                  710 	.db #0x00
+   0223 00                  711 	.db #0x00
+   0224 80                  712 	.db #0x80
+   0225 00                  713 	.db #0x00
+   0226 00                  714 	.db #0x00
+   0227 00                  715 	.db #0x00
+   0228 00                  716 	.db #0x00
+   0229 00                  717 	.db #0x00
+   022A 00                  718 	.db #0x00
+   022B 00                  719 	.db #0x00
+   022C 00                  720 	.db #0x00
+   022D 00                  721 	.db #0x00
+   022E 00                  722 	.db #0x00
+   022F 00                  723 	.db #0x00
+   0230 03                  724 	.db #0x03
+   0231 00                  725 	.db #0x00
+   0232 01                  726 	.db #0x01
+   0233 06                  727 	.db #0x06
+   0234 17                  728 	.db #0x17
+   0235 08                  729 	.db #0x08
+   0236 01                  730 	.db #0x01
+   0237 00                  731 	.db #0x00
+   0238 05                  732 	.db #0x05
+   0239 02                  733 	.db #0x02
+   023A 11                  734 	.db #0x11
+   023B 0E                  735 	.db #0x0E
+   023C 77                  736 	.db #0x77
+   023D 08                  737 	.db #0x08
+   023E 9F                  738 	.db #0x9F
+   023F 60                  739 	.db #0x60
+   0240 BF                  740 	.db #0xBF
+   0241 40                  741 	.db #0x40
+   0242 FF                  742 	.db #0xFF
+   0243 00                  743 	.db #0x00
+   0244 FF                  744 	.db #0xFF
+   0245 00                  745 	.db #0x00
+   0246 1F                  746 	.db #0x1F
+   0247 E0                  747 	.db #0xE0
+   0248 FF                  748 	.db #0xFF
+   0249 00                  749 	.db #0x00
+   024A FF                  750 	.db #0xFF
+   024B 00                  751 	.db #0x00
+   024C FF                  752 	.db #0xFF
+   024D 00                  753 	.db #0x00
+   024E FF                  754 	.db #0xFF
+   024F 00                  755 	.db #0x00
+   0250 FF                  756 	.db #0xFF
+   0251 00                  757 	.db #0x00
+   0252 FF                  758 	.db #0xFF
+   0253 00                  759 	.db #0x00
+   0254 FF                  760 	.db #0xFF
+   0255 00                  761 	.db #0x00
+   0256 FF                  762 	.db #0xFF
+   0257 00                  763 	.db #0x00
+   0258 FF                  764 	.db #0xFF
+   0259 00                  765 	.db #0x00
+   025A FF                  766 	.db #0xFF
+   025B 00                  767 	.db #0x00
+   025C FF                  768 	.db #0xFF
+   025D 00                  769 	.db #0x00
+   025E FE                  770 	.db #0xFE
+   025F 01                  771 	.db #0x01
+   0260 F1                  772 	.db #0xF1
+   0261 0F                  773 	.db #0x0F
+   0262 F3                  774 	.db #0xF3
+   0263 0F                  775 	.db #0x0F
+   0264 F7                  776 	.db #0xF7
+   0265 0F                  777 	.db #0x0F
+   0266 FF                  778 	.db #0xFF
+   0267 00                  779 	.db #0x00
+   0268 FF                  780 	.db #0xFF
+   0269 00                  781 	.db #0x00
+   026A FF                  782 	.db #0xFF
+   026B 00                  783 	.db #0x00
+   026C 9F                  784 	.db #0x9F
+   026D 60                  785 	.db #0x60
+   026E 77                  786 	.db #0x77
+   026F F8                  787 	.db #0xF8
+   0270 FB                  788 	.db #0xFB
+   0271 FC                  789 	.db #0xFC
+   0272 FD                  790 	.db #0xFD
+   0273 FE                  791 	.db #0xFE
+   0274 FD                  792 	.db #0xFD
+   0275 FE                  793 	.db #0xFE
+   0276 FE                  794 	.db #0xFE
+   0277 FF                  795 	.db #0xFF
+   0278 BF                  796 	.db #0xBF
+   0279 7E                  797 	.db #0x7E
+   027A 83                  798 	.db #0x83
+   027B 7C                  799 	.db #0x7C
+   027C 87                  800 	.db #0x87
+   027D 78                  801 	.db #0x78
+   027E 0E                  802 	.db #0x0E
+   027F F1                  803 	.db #0xF1
+   0280 1C                  804 	.db #0x1C
+   0281 E3                  805 	.db #0xE3
+   0282 10                  806 	.db #0x10
+   0283 EF                  807 	.db #0xEF
+   0284 A0                  808 	.db #0xA0
+   0285 5F                  809 	.db #0x5F
+   0286 E0                  810 	.db #0xE0
+   0287 1F                  811 	.db #0x1F
+   0288 C0                  812 	.db #0xC0
+   0289 3F                  813 	.db #0x3F
+   028A 80                  814 	.db #0x80
+   028B 7F                  815 	.db #0x7F
+   028C 00                  816 	.db #0x00
+   028D FF                  817 	.db #0xFF
+   028E 00                  818 	.db #0x00
+   028F FF                  819 	.db #0xFF
+   0290 00                  820 	.db #0x00
+   0291 FF                  821 	.db #0xFF
+   0292 00                  822 	.db #0x00
+   0293 FF                  823 	.db #0xFF
+   0294 20                  824 	.db #0x20
+   0295 DF                  825 	.db #0xDF
+   0296 00                  826 	.db #0x00
+   0297 FF                  827 	.db #0xFF
+   0298 00                  828 	.db #0x00
+   0299 FF                  829 	.db #0xFF
+   029A 01                  830 	.db #0x01
+   029B FE                  831 	.db #0xFE
+   029C 01                  832 	.db #0x01
+   029D FE                  833 	.db #0xFE
+   029E 00                  834 	.db #0x00
+   029F FE                  835 	.db #0xFE
+   02A0 02                  836 	.db #0x02
+   02A1 FC                  837 	.db #0xFC
+   02A2 00                  838 	.db #0x00
+   02A3 FC                  839 	.db #0xFC
+   02A4 0C                  840 	.db #0x0C
+   02A5 F0                  841 	.db #0xF0
+   02A6 80                  842 	.db #0x80
+   02A7 00                  843 	.db #0x00
+   02A8 00                  844 	.db #0x00
+   02A9 00                  845 	.db #0x00
+   02AA 00                  846 	.db #0x00
+   02AB 00                  847 	.db #0x00
+   02AC 00                  848 	.db #0x00
+   02AD 00                  849 	.db #0x00
+   02AE 00                  850 	.db #0x00
+   02AF 00                  851 	.db #0x00
+   02B0 00                  852 	.db #0x00
+   02B1 00                  853 	.db #0x00
+   02B2 00                  854 	.db #0x00
+   02B3 00                  855 	.db #0x00
+   02B4 00                  856 	.db #0x00
+   02B5 00                  857 	.db #0x00
+   02B6 11                  858 	.db #0x11
+   02B7 0E                  859 	.db #0x0E
+   02B8 00                  860 	.db #0x00
+   02B9 0F                  861 	.db #0x0F
+   02BA 08                  862 	.db #0x08
+   02BB 07                  863 	.db #0x07
+   02BC 00                  864 	.db #0x00
+   02BD 07                  865 	.db #0x07
+   02BE 00                  866 	.db #0x00
+   02BF 03                  867 	.db #0x03
+   02C0 02                  868 	.db #0x02
+   02C1 01                  869 	.db #0x01
+   02C2 01                  870 	.db #0x01
+   02C3 00                  871 	.db #0x00
+   02C4 00                  872 	.db #0x00
+   02C5 00                  873 	.db #0x00
+   02C6 FF                  874 	.db #0xFF
+   02C7 00                  875 	.db #0x00
+   02C8 FF                  876 	.db #0xFF
+   02C9 00                  877 	.db #0x00
+   02CA FF                  878 	.db #0xFF
+   02CB 00                  879 	.db #0x00
+   02CC 3F                  880 	.db #0x3F
+   02CD C0                  881 	.db #0xC0
+   02CE 1F                  882 	.db #0x1F
+   02CF E0                  883 	.db #0xE0
+   02D0 0F                  884 	.db #0x0F
+   02D1 F0                  885 	.db #0xF0
+   02D2 0F                  886 	.db #0x0F
+   02D3 F0                  887 	.db #0xF0
+   02D4 03                  888 	.db #0x03
+   02D5 FC                  889 	.db #0xFC
+   02D6 C0                  890 	.db #0xC0
+   02D7 3F                  891 	.db #0x3F
+   02D8 E0                  892 	.db #0xE0
+   02D9 1F                  893 	.db #0x1F
+   02DA F0                  894 	.db #0xF0
+   02DB 0F                  895 	.db #0x0F
+   02DC F8                  896 	.db #0xF8
+   02DD 07                  897 	.db #0x07
+   02DE FC                  898 	.db #0xFC
+   02DF 03                  899 	.db #0x03
+   02E0 FC                  900 	.db #0xFC
+   02E1 03                  901 	.db #0x03
+   02E2 FB                  902 	.db #0xFB
+   02E3 07                  903 	.db #0x07
+   02E4 FC                  904 	.db #0xFC
+   02E5 03                  905 	.db #0x03
+   02E6 00                  906 	.db #0x00
+   02E7 C0                  907 	.db #0xC0
+   02E8 10                  908 	.db #0x10
+   02E9 E0                  909 	.db #0xE0
+   02EA 10                  910 	.db #0x10
+   02EB F8                  911 	.db #0xF8
+   02EC 4E                  912 	.db #0x4E
+   02ED BC                  913 	.db #0xBC
+   02EE 03                  914 	.db #0x03
+   02EF FF                  915 	.db #0xFF
+   02F0 00                  916 	.db #0x00
+   02F1 FF                  917 	.db #0xFF
+   02F2 C1                  918 	.db #0xC1
+   02F3 FF                  919 	.db #0xFF
+   02F4 F1                  920 	.db #0xF1
+   02F5 FF                  921 	.db #0xFF
+   02F6 00                  922 	.db #0x00
+   02F7 00                  923 	.db #0x00
+   02F8 00                  924 	.db #0x00
+   02F9 00                  925 	.db #0x00
+   02FA 00                  926 	.db #0x00
+   02FB 00                  927 	.db #0x00
+   02FC 00                  928 	.db #0x00
+   02FD 00                  929 	.db #0x00
+   02FE 40                  930 	.db #0x40
+   02FF 80                  931 	.db #0x80
+   0300 EE                  932 	.db #0xEE
+   0301 F0                  933 	.db #0xF0
+   0302 1D                  934 	.db #0x1D
+   0303 FE                  935 	.db #0xFE
+   0304 F0                  936 	.db #0xF0
+   0305 0F                  937 	.db #0x0F
+   0306 00                  938 	.db #0x00
+   0307 00                  939 	.db #0x00
+   0308 00                  940 	.db #0x00
+   0309 00                  941 	.db #0x00
+   030A 01                  942 	.db #0x01
+   030B 00                  943 	.db #0x00
+   030C 04                  944 	.db #0x04
+   030D 03                  945 	.db #0x03
+   030E 0F                  946 	.db #0x0F
+   030F 00                  947 	.db #0x00
+   0310 1F                  948 	.db #0x1F
+   0311 00                  949 	.db #0x00
+   0312 C7                  950 	.db #0xC7
+   0313 38                  951 	.db #0x38
+   0314 3F                  952 	.db #0x3F
+   0315 C0                  953 	.db #0xC0
+   0316 2F                  954 	.db #0x2F
+   0317 10                  955 	.db #0x10
+   0318 BF                  956 	.db #0xBF
+   0319 40                  957 	.db #0x40
+   031A 7F                  958 	.db #0x7F
+   031B 80                  959 	.db #0x80
+   031C FF                  960 	.db #0xFF
+   031D 00                  961 	.db #0x00
+   031E FF                  962 	.db #0xFF
+   031F 00                  963 	.db #0x00
+   0320 FF                  964 	.db #0xFF
+   0321 00                  965 	.db #0x00
+   0322 FF                  966 	.db #0xFF
+   0323 00                  967 	.db #0x00
+   0324 FE                  968 	.db #0xFE
+   0325 00                  969 	.db #0x00
+   0326 F9                  970 	.db #0xF9
+   0327 00                  971 	.db #0x00
+   0328 F3                  972 	.db #0xF3
+   0329 0F                  973 	.db #0x0F
+   032A EF                  974 	.db #0xEF
+   032B 1F                  975 	.db #0x1F
+   032C CF                  976 	.db #0xCF
+   032D 3F                  977 	.db #0x3F
+   032E CF                  978 	.db #0xCF
+   032F 3F                  979 	.db #0x3F
+   0330 9F                  980 	.db #0x9F
+   0331 7F                  981 	.db #0x7F
+   0332 9F                  982 	.db #0x9F
+   0333 7F                  983 	.db #0x7F
+   0334 5F                  984 	.db #0x5F
+   0335 3F                  985 	.db #0x3F
+   0336 8F                  986 	.db #0x8F
+   0337 00                  987 	.db #0x00
+   0338 D7                  988 	.db #0xD7
+   0339 E0                  989 	.db #0xE0
+   033A EB                  990 	.db #0xEB
+   033B F0                  991 	.db #0xF0
+   033C FD                  992 	.db #0xFD
+   033D F8                  993 	.db #0xF8
+   033E FB                  994 	.db #0xFB
+   033F FC                  995 	.db #0xFC
+   0340 FF                  996 	.db #0xFF
+   0341 FC                  997 	.db #0xFC
+   0342 FF                  998 	.db #0xFF
+   0343 FC                  999 	.db #0xFC
+   0344 FF                 1000 	.db #0xFF
+   0345 FC                 1001 	.db #0xFC
+   0346 FF                 1002 	.db #0xFF
+   0347 0F                 1003 	.db #0x0F
+   0348 FF                 1004 	.db #0xFF
+   0349 0F                 1005 	.db #0x0F
+   034A F7                 1006 	.db #0xF7
+   034B 0F                 1007 	.db #0x0F
+   034C FB                 1008 	.db #0xFB
+   034D 07                 1009 	.db #0x07
+   034E F9                 1010 	.db #0xF9
+   034F 07                 1011 	.db #0x07
+   0350 FC                 1012 	.db #0xFC
+   0351 03                 1013 	.db #0x03
+   0352 FF                 1014 	.db #0xFF
+   0353 00                 1015 	.db #0x00
+   0354 FD                 1016 	.db #0xFD
+   0355 02                 1017 	.db #0x02
+   0356 FF                 1018 	.db #0xFF
+   0357 FE                 1019 	.db #0xFE
+   0358 FE                 1020 	.db #0xFE
+   0359 FF                 1021 	.db #0xFF
+   035A FF                 1022 	.db #0xFF
+   035B FE                 1023 	.db #0xFE
+   035C FD                 1024 	.db #0xFD
+   035D FE                 1025 	.db #0xFE
+   035E FF                 1026 	.db #0xFF
+   035F FC                 1027 	.db #0xFC
+   0360 FA                 1028 	.db #0xFA
+   0361 FD                 1029 	.db #0xFD
+   0362 08                 1030 	.db #0x08
+   0363 F7                 1031 	.db #0xF7
+   0364 81                 1032 	.db #0x81
+   0365 7E                 1033 	.db #0x7E
+   0366 80                 1034 	.db #0x80
+   0367 7F                 1035 	.db #0x7F
+   0368 80                 1036 	.db #0x80
+   0369 7F                 1037 	.db #0x7F
+   036A 81                 1038 	.db #0x81
+   036B 7E                 1039 	.db #0x7E
+   036C 82                 1040 	.db #0x82
+   036D 7D                 1041 	.db #0x7D
+   036E 11                 1042 	.db #0x11
+   036F EE                 1043 	.db #0xEE
+   0370 70                 1044 	.db #0x70
+   0371 8F                 1045 	.db #0x8F
+   0372 E7                 1046 	.db #0xE7
+   0373 18                 1047 	.db #0x18
+   0374 C7                 1048 	.db #0xC7
+   0375 38                 1049 	.db #0x38
+   0376 41                 1050 	.db #0x41
+   0377 BE                 1051 	.db #0xBE
+   0378 84                 1052 	.db #0x84
+   0379 7B                 1053 	.db #0x7B
+   037A 44                 1054 	.db #0x44
+   037B BB                 1055 	.db #0xBB
+   037C 98                 1056 	.db #0x98
+   037D 67                 1057 	.db #0x67
+   037E 30                 1058 	.db #0x30
+   037F CF                 1059 	.db #0xCF
+   0380 E0                 1060 	.db #0xE0
+   0381 1F                 1061 	.db #0x1F
+   0382 C0                 1062 	.db #0xC0
+   0383 3F                 1063 	.db #0x3F
+   0384 80                 1064 	.db #0x80
+   0385 7F                 1065 	.db #0x7F
+   0386 00                 1066 	.db #0x00
+   0387 F8                 1067 	.db #0xF8
+   0388 08                 1068 	.db #0x08
+   0389 F0                 1069 	.db #0xF0
+   038A 00                 1070 	.db #0x00
+   038B F0                 1071 	.db #0xF0
+   038C 10                 1072 	.db #0x10
+   038D E0                 1073 	.db #0xE0
+   038E 00                 1074 	.db #0x00
+   038F E0                 1075 	.db #0xE0
+   0390 20                 1076 	.db #0x20
+   0391 C0                 1077 	.db #0xC0
+   0392 00                 1078 	.db #0x00
+   0393 C0                 1079 	.db #0xC0
+   0394 40                 1080 	.db #0x40
+   0395 80                 1081 	.db #0x80
+   0396 83                 1082 	.db #0x83
+   0397 7C                 1083 	.db #0x7C
+   0398 40                 1084 	.db #0x40
+   0399 3F                 1085 	.db #0x3F
+   039A 00                 1086 	.db #0x00
+   039B 3F                 1087 	.db #0x3F
+   039C 00                 1088 	.db #0x00
+   039D 1F                 1089 	.db #0x1F
+   039E 10                 1090 	.db #0x10
+   039F 0F                 1091 	.db #0x0F
+   03A0 09                 1092 	.db #0x09
+   03A1 06                 1093 	.db #0x06
+   03A2 01                 1094 	.db #0x01
+   03A3 07                 1095 	.db #0x07
+   03A4 01                 1096 	.db #0x01
+   03A5 03                 1097 	.db #0x03
+   03A6 FE                 1098 	.db #0xFE
+   03A7 01                 1099 	.db #0x01
+   03A8 E7                 1100 	.db #0xE7
+   03A9 00                 1101 	.db #0x00
+   03AA 45                 1102 	.db #0x45
+   03AB 80                 1103 	.db #0x80
+   03AC A6                 1104 	.db #0xA6
+   03AD 00                 1105 	.db #0x00
+   03AE F1                 1106 	.db #0xF1
+   03AF 00                 1107 	.db #0x00
+   03B0 7B                 1108 	.db #0x7B
+   03B1 80                 1109 	.db #0x80
+   03B2 3B                 1110 	.db #0x3B
+   03B3 C0                 1111 	.db #0xC0
+   03B4 9E                 1112 	.db #0x9E
+   03B5 E0                 1113 	.db #0xE0
+   03B6 70                 1114 	.db #0x70
+   03B7 FF                 1115 	.db #0xFF
+   03B8 9C                 1116 	.db #0x9C
+   03B9 7F                 1117 	.db #0x7F
+   03BA 73                 1118 	.db #0x73
+   03BB 0F                 1119 	.db #0x0F
+   03BC A2                 1120 	.db #0xA2
+   03BD 41                 1121 	.db #0x41
+   03BE F6                 1122 	.db #0xF6
+   03BF 01                 1123 	.db #0x01
+   03C0 3C                 1124 	.db #0x3C
+   03C1 03                 1125 	.db #0x03
+   03C2 3B                 1126 	.db #0x3B
+   03C3 04                 1127 	.db #0x04
+   03C4 FF                 1128 	.db #0xFF
+   03C5 00                 1129 	.db #0x00
+   03C6 F9                 1130 	.db #0xF9
+   03C7 06                 1131 	.db #0x06
+   03C8 13                 1132 	.db #0x13
+   03C9 EC                 1133 	.db #0xEC
+   03CA 03                 1134 	.db #0x03
+   03CB FC                 1135 	.db #0xFC
+   03CC E7                 1136 	.db #0xE7
+   03CD F8                 1137 	.db #0xF8
+   03CE CF                 1138 	.db #0xCF
+   03CF F0                 1139 	.db #0xF0
+   03D0 5F                 1140 	.db #0x5F
+   03D1 A0                 1141 	.db #0xA0
+   03D2 DF                 1142 	.db #0xDF
+   03D3 20                 1143 	.db #0x20
+   03D4 BF                 1144 	.db #0xBF
+   03D5 40                 1145 	.db #0x40
+   03D6 3F                 1146 	.db #0x3F
+   03D7 C0                 1147 	.db #0xC0
+   03D8 FF                 1148 	.db #0xFF
+   03D9 00                 1149 	.db #0x00
+   03DA FF                 1150 	.db #0xFF
+   03DB 00                 1151 	.db #0x00
+   03DC FF                 1152 	.db #0xFF
+   03DD 00                 1153 	.db #0x00
+   03DE FF                 1154 	.db #0xFF
+   03DF 00                 1155 	.db #0x00
+   03E0 FE                 1156 	.db #0xFE
+   03E1 00                 1157 	.db #0x00
+   03E2 FC                 1158 	.db #0xFC
+   03E3 00                 1159 	.db #0x00
+   03E4 F8                 1160 	.db #0xF8
+   03E5 00                 1161 	.db #0x00
+   03E6 F8                 1162 	.db #0xF8
+   03E7 00                 1163 	.db #0x00
+   03E8 F0                 1164 	.db #0xF0
+   03E9 00                 1165 	.db #0x00
+   03EA C0                 1166 	.db #0xC0
+   03EB 00                 1167 	.db #0x00
+   03EC 80                 1168 	.db #0x80
+   03ED 00                 1169 	.db #0x00
+   03EE 00                 1170 	.db #0x00
+   03EF 00                 1171 	.db #0x00
+   03F0 00                 1172 	.db #0x00
+   03F1 00                 1173 	.db #0x00
+   03F2 00                 1174 	.db #0x00
+   03F3 00                 1175 	.db #0x00
+   03F4 00                 1176 	.db #0x00
+   03F5 00                 1177 	.db #0x00
+   03F6 1F                 1178 	.db #0x1F
+   03F7 3F                 1179 	.db #0x3F
+   03F8 2F                 1180 	.db #0x2F
+   03F9 1F                 1181 	.db #0x1F
+   03FA 07                 1182 	.db #0x07
+   03FB 0F                 1183 	.db #0x0F
+   03FC 04                 1184 	.db #0x04
+   03FD 03                 1185 	.db #0x03
+   03FE 00                 1186 	.db #0x00
+   03FF 00                 1187 	.db #0x00
+   0400 03                 1188 	.db #0x03
+   0401 00                 1189 	.db #0x00
+   0402 03                 1190 	.db #0x03
+   0403 00                 1191 	.db #0x00
+   0404 07                 1192 	.db #0x07
+   0405 00                 1193 	.db #0x00
+   0406 F9                 1194 	.db #0xF9
+   0407 FC                 1195 	.db #0xFC
+   0408 FF                 1196 	.db #0xFF
+   0409 F8                 1197 	.db #0xF8
+   040A FF                 1198 	.db #0xFF
+   040B F0                 1199 	.db #0xF0
+   040C 1F                 1200 	.db #0x1F
+   040D E0                 1201 	.db #0xE0
+   040E FF                 1202 	.db #0xFF
+   040F 00                 1203 	.db #0x00
+   0410 FF                 1204 	.db #0xFF
+   0411 00                 1205 	.db #0x00
+   0412 FF                 1206 	.db #0xFF
+   0413 00                 1207 	.db #0x00
+   0414 FF                 1208 	.db #0xFF
+   0415 00                 1209 	.db #0x00
+   0416 FF                 1210 	.db #0xFF
+   0417 00                 1211 	.db #0x00
+   0418 FE                 1212 	.db #0xFE
+   0419 01                 1213 	.db #0x01
+   041A FC                 1214 	.db #0xFC
+   041B 03                 1215 	.db #0x03
+   041C F8                 1216 	.db #0xF8
+   041D 07                 1217 	.db #0x07
+   041E F1                 1218 	.db #0xF1
+   041F 0E                 1219 	.db #0x0E
+   0420 E3                 1220 	.db #0xE3
+   0421 1C                 1221 	.db #0x1C
+   0422 FF                 1222 	.db #0xFF
+   0423 00                 1223 	.db #0x00
+   0424 FF                 1224 	.db #0xFF
+   0425 00                 1225 	.db #0x00
+   0426 07                 1226 	.db #0x07
+   0427 F8                 1227 	.db #0xF8
+   0428 0F                 1228 	.db #0x0F
+   0429 F0                 1229 	.db #0xF0
+   042A 1F                 1230 	.db #0x1F
+   042B E0                 1231 	.db #0xE0
+   042C 3F                 1232 	.db #0x3F
+   042D C0                 1233 	.db #0xC0
+   042E FF                 1234 	.db #0xFF
+   042F 00                 1235 	.db #0x00
+   0430 FF                 1236 	.db #0xFF
+   0431 00                 1237 	.db #0x00
+   0432 FF                 1238 	.db #0xFF
+   0433 00                 1239 	.db #0x00
+   0434 FE                 1240 	.db #0xFE
+   0435 01                 1241 	.db #0x01
+   0436 FF                 1242 	.db #0xFF
+   0437 00                 1243 	.db #0x00
+   0438 FC                 1244 	.db #0xFC
+   0439 03                 1245 	.db #0x03
+   043A FC                 1246 	.db #0xFC
+   043B 03                 1247 	.db #0x03
+   043C F0                 1248 	.db #0xF0
+   043D 0F                 1249 	.db #0x0F
+   043E E0                 1250 	.db #0xE0
+   043F 1F                 1251 	.db #0x1F
+   0440 C0                 1252 	.db #0xC0
+   0441 3F                 1253 	.db #0x3F
+   0442 00                 1254 	.db #0x00
+   0443 FF                 1255 	.db #0xFF
+   0444 C0                 1256 	.db #0xC0
+   0445 3F                 1257 	.db #0x3F
+   0446 00                 1258 	.db #0x00
+   0447 FF                 1259 	.db #0xFF
+   0448 00                 1260 	.db #0x00
+   0449 FF                 1261 	.db #0xFF
+   044A 00                 1262 	.db #0x00
+   044B FF                 1263 	.db #0xFF
+   044C 01                 1264 	.db #0x01
+   044D FE                 1265 	.db #0xFE
+   044E 00                 1266 	.db #0x00
+   044F FE                 1267 	.db #0xFE
+   0450 02                 1268 	.db #0x02
+   0451 FC                 1269 	.db #0xFC
+   0452 00                 1270 	.db #0x00
+   0453 FC                 1271 	.db #0xFC
+   0454 04                 1272 	.db #0x04
+   0455 F8                 1273 	.db #0xF8
+   0456 00                 1274 	.db #0x00
+   0457 80                 1275 	.db #0x80
+   0458 80                 1276 	.db #0x80
+   0459 00                 1277 	.db #0x00
+   045A 00                 1278 	.db #0x00
+   045B 00                 1279 	.db #0x00
+   045C 00                 1280 	.db #0x00
+   045D 00                 1281 	.db #0x00
+   045E 00                 1282 	.db #0x00
+   045F 00                 1283 	.db #0x00
+   0460 00                 1284 	.db #0x00
+   0461 00                 1285 	.db #0x00
+   0462 00                 1286 	.db #0x00
+   0463 00                 1287 	.db #0x00
+   0464 00                 1288 	.db #0x00
+   0465 00                 1289 	.db #0x00
+   0466 01                 1290 	.db #0x01
+   0467 03                 1291 	.db #0x03
+   0468 03                 1292 	.db #0x03
+   0469 01                 1293 	.db #0x01
+   046A 00                 1294 	.db #0x00
+   046B 01                 1295 	.db #0x01
+   046C 01                 1296 	.db #0x01
+   046D 00                 1297 	.db #0x00
+   046E 00                 1298 	.db #0x00
+   046F 00                 1299 	.db #0x00
+   0470 00                 1300 	.db #0x00
+   0471 00                 1301 	.db #0x00
+   0472 00                 1302 	.db #0x00
+   0473 00                 1303 	.db #0x00
+   0474 00                 1304 	.db #0x00
+   0475 00                 1305 	.db #0x00
+   0476 8F                 1306 	.db #0x8F
+   0477 F0                 1307 	.db #0xF0
+   0478 9D                 1308 	.db #0x9D
+   0479 E0                 1309 	.db #0xE0
+   047A ED                 1310 	.db #0xED
+   047B F0                 1311 	.db #0xF0
+   047C 2F                 1312 	.db #0x2F
+   047D F0                 1313 	.db #0xF0
+   047E 1E                 1314 	.db #0x1E
+   047F E0                 1315 	.db #0xE0
+   0480 BF                 1316 	.db #0xBF
+   0481 40                 1317 	.db #0x40
+   0482 7F                 1318 	.db #0x7F
+   0483 00                 1319 	.db #0x00
+   0484 7C                 1320 	.db #0x7C
+   0485 03                 1321 	.db #0x03
+   0486 F1                 1322 	.db #0xF1
+   0487 00                 1323 	.db #0x00
+   0488 A2                 1324 	.db #0xA2
+   0489 41                 1325 	.db #0x41
+   048A 45                 1326 	.db #0x45
+   048B 82                 1327 	.db #0x82
+   048C 8B                 1328 	.db #0x8B
+   048D 04                 1329 	.db #0x04
+   048E 07                 1330 	.db #0x07
+   048F 18                 1331 	.db #0x18
+   0490 CF                 1332 	.db #0xCF
+   0491 30                 1333 	.db #0x30
+   0492 1F                 1334 	.db #0x1F
+   0493 E0                 1335 	.db #0xE0
+   0494 3F                 1336 	.db #0x3F
+   0495 C0                 1337 	.db #0xC0
+   0496 7F                 1338 	.db #0x7F
+   0497 80                 1339 	.db #0x80
+   0498 FF                 1340 	.db #0xFF
+   0499 00                 1341 	.db #0x00
+   049A FF                 1342 	.db #0xFF
+   049B 00                 1343 	.db #0x00
+   049C FF                 1344 	.db #0xFF
+   049D 00                 1345 	.db #0x00
+   049E FF                 1346 	.db #0xFF
+   049F 00                 1347 	.db #0x00
+   04A0 FF                 1348 	.db #0xFF
+   04A1 00                 1349 	.db #0x00
+   04A2 FE                 1350 	.db #0xFE
+   04A3 00                 1351 	.db #0x00
+   04A4 FC                 1352 	.db #0xFC
+   04A5 00                 1353 	.db #0x00
+   04A6 F0                 1354 	.db #0xF0
+   04A7 00                 1355 	.db #0x00
+   04A8 E0                 1356 	.db #0xE0
+   04A9 00                 1357 	.db #0x00
+   04AA C0                 1358 	.db #0xC0
+   04AB 00                 1359 	.db #0x00
+   04AC 80                 1360 	.db #0x80
+   04AD 00                 1361 	.db #0x00
+   04AE 00                 1362 	.db #0x00
+   04AF 00                 1363 	.db #0x00
+   04B0 00                 1364 	.db #0x00
+   04B1 00                 1365 	.db #0x00
+   04B2 00                 1366 	.db #0x00
+   04B3 00                 1367 	.db #0x00
+   04B4 00                 1368 	.db #0x00
+   04B5 00                 1369 	.db #0x00
+   04B6 00                 1370 	.db #0x00
+   04B7 00                 1371 	.db #0x00
+   04B8 00                 1372 	.db #0x00
+   04B9 00                 1373 	.db #0x00
+   04BA 00                 1374 	.db #0x00
+   04BB 00                 1375 	.db #0x00
+   04BC 00                 1376 	.db #0x00
+   04BD 00                 1377 	.db #0x00
+   04BE 00                 1378 	.db #0x00
+   04BF 00                 1379 	.db #0x00
+   04C0 01                 1380 	.db #0x01
+   04C1 00                 1381 	.db #0x00
+   04C2 03                 1382 	.db #0x03
+   04C3 00                 1383 	.db #0x00
+   04C4 07                 1384 	.db #0x07
+   04C5 00                 1385 	.db #0x00
+   04C6 0F                 1386 	.db #0x0F
+   04C7 00                 1387 	.db #0x00
+   04C8 1F                 1388 	.db #0x1F
+   04C9 00                 1389 	.db #0x00
+   04CA 3F                 1390 	.db #0x3F
+   04CB 00                 1391 	.db #0x00
+   04CC 7F                 1392 	.db #0x7F
+   04CD 00                 1393 	.db #0x00
+   04CE FF                 1394 	.db #0xFF
+   04CF 00                 1395 	.db #0x00
+   04D0 FF                 1396 	.db #0xFF
+   04D1 00                 1397 	.db #0x00
+   04D2 FF                 1398 	.db #0xFF
+   04D3 00                 1399 	.db #0x00
+   04D4 FF                 1400 	.db #0xFF
+   04D5 00                 1401 	.db #0x00
+   04D6 FF                 1402 	.db #0xFF
+   04D7 00                 1403 	.db #0x00
+   04D8 FF                 1404 	.db #0xFF
+   04D9 00                 1405 	.db #0x00
+   04DA FF                 1406 	.db #0xFF
+   04DB 00                 1407 	.db #0x00
+   04DC FF                 1408 	.db #0xFF
+   04DD 00                 1409 	.db #0x00
+   04DE FF                 1410 	.db #0xFF
+   04DF 00                 1411 	.db #0x00
+   04E0 FF                 1412 	.db #0xFF
+   04E1 00                 1413 	.db #0x00
+   04E2 FF                 1414 	.db #0xFF
+   04E3 00                 1415 	.db #0x00
+   04E4 FF                 1416 	.db #0xFF
+   04E5 00                 1417 	.db #0x00
+   04E6 FF                 1418 	.db #0xFF
+   04E7 00                 1419 	.db #0x00
+   04E8 FF                 1420 	.db #0xFF
+   04E9 00                 1421 	.db #0x00
+   04EA FF                 1422 	.db #0xFF
+   04EB 00                 1423 	.db #0x00
+   04EC FF                 1424 	.db #0xFF
+   04ED 00                 1425 	.db #0x00
+   04EE FF                 1426 	.db #0xFF
+   04EF 00                 1427 	.db #0x00
+   04F0 FF                 1428 	.db #0xFF
+   04F1 00                 1429 	.db #0x00
+   04F2 FF                 1430 	.db #0xFF
+   04F3 00                 1431 	.db #0x00
+   04F4 FB                 1432 	.db #0xFB
+   04F5 04                 1433 	.db #0x04
+   04F6 FF                 1434 	.db #0xFF
+   04F7 00                 1435 	.db #0x00
+   04F8 FC                 1436 	.db #0xFC
+   04F9 03                 1437 	.db #0x03
+   04FA F0                 1438 	.db #0xF0
+   04FB 0F                 1439 	.db #0x0F
+   04FC F0                 1440 	.db #0xF0
+   04FD 0F                 1441 	.db #0x0F
+   04FE C4                 1442 	.db #0xC4
+   04FF 3B                 1443 	.db #0x3B
+   0500 98                 1444 	.db #0x98
+   0501 67                 1445 	.db #0x67
+   0502 A4                 1446 	.db #0xA4
+   0503 5B                 1447 	.db #0x5B
+   0504 08                 1448 	.db #0x08
+   0505 F7                 1449 	.db #0xF7
+   0506 00                 1450 	.db #0x00
+   0507 FF                 1451 	.db #0xFF
+   0508 00                 1452 	.db #0x00
+   0509 FF                 1453 	.db #0xFF
+   050A 00                 1454 	.db #0x00
+   050B FF                 1455 	.db #0xFF
+   050C 00                 1456 	.db #0x00
+   050D FF                 1457 	.db #0xFF
+   050E 00                 1458 	.db #0x00
+   050F FF                 1459 	.db #0xFF
+   0510 00                 1460 	.db #0x00
+   0511 FF                 1461 	.db #0xFF
+   0512 00                 1462 	.db #0x00
+   0513 FF                 1463 	.db #0xFF
+   0514 00                 1464 	.db #0x00
+   0515 FF                 1465 	.db #0xFF
+   0516 00                 1466 	.db #0x00
+   0517 F8                 1467 	.db #0xF8
+   0518 00                 1468 	.db #0x00
+   0519 F0                 1469 	.db #0xF0
+   051A 10                 1470 	.db #0x10
+   051B E0                 1471 	.db #0xE0
+   051C 00                 1472 	.db #0x00
+   051D E0                 1473 	.db #0xE0
+   051E 20                 1474 	.db #0x20
+   051F C0                 1475 	.db #0xC0
+   0520 40                 1476 	.db #0x40
+   0521 80                 1477 	.db #0x80
+   0522 00                 1478 	.db #0x00
+   0523 80                 1479 	.db #0x80
+   0524 80                 1480 	.db #0x80
+   0525 00                 1481 	.db #0x00
+   0526 38                 1482 	.db #0x38
+   0527 07                 1483 	.db #0x07
+   0528 29                 1484 	.db #0x29
+   0529 1E                 1485 	.db #0x1E
+   052A 03                 1486 	.db #0x03
+   052B 3C                 1487 	.db #0x3C
+   052C 23                 1488 	.db #0x23
+   052D 1C                 1489 	.db #0x1C
+   052E 2F                 1490 	.db #0x2F
+   052F 10                 1491 	.db #0x10
+   0530 0F                 1492 	.db #0x0F
+   0531 10                 1493 	.db #0x10
+   0532 2F                 1494 	.db #0x2F
+   0533 10                 1495 	.db #0x10
+   0534 3F                 1496 	.db #0x3F
+   0535 00                 1497 	.db #0x00
+   0536 7F                 1498 	.db #0x7F
+   0537 80                 1499 	.db #0x80
+   0538 FF                 1500 	.db #0xFF
+   0539 00                 1501 	.db #0x00
+   053A FF                 1502 	.db #0xFF
+   053B 00                 1503 	.db #0x00
+   053C FF                 1504 	.db #0xFF
+   053D 00                 1505 	.db #0x00
+   053E FF                 1506 	.db #0xFF
+   053F 00                 1507 	.db #0x00
+   0540 FF                 1508 	.db #0xFF
+   0541 00                 1509 	.db #0x00
+   0542 FF                 1510 	.db #0xFF
+   0543 00                 1511 	.db #0x00
+   0544 FF                 1512 	.db #0xFF
+   0545 00                 1513 	.db #0x00
+   0546 F8                 1514 	.db #0xF8
+   0547 00                 1515 	.db #0x00
+   0548 F8                 1516 	.db #0xF8
+   0549 00                 1517 	.db #0x00
+   054A F0                 1518 	.db #0xF0
+   054B 00                 1519 	.db #0x00
+   054C E0                 1520 	.db #0xE0
+   054D 00                 1521 	.db #0x00
+   054E E0                 1522 	.db #0xE0
+   054F 00                 1523 	.db #0x00
+   0550 C0                 1524 	.db #0xC0
+   0551 00                 1525 	.db #0x00
+   0552 C0                 1526 	.db #0xC0
+   0553 00                 1527 	.db #0x00
+   0554 C0                 1528 	.db #0xC0
+   0555 00                 1529 	.db #0x00
+   0556 00                 1530 	.db #0x00
+   0557 00                 1531 	.db #0x00
+   0558 00                 1532 	.db #0x00
+   0559 00                 1533 	.db #0x00
+   055A 00                 1534 	.db #0x00
+   055B 00                 1535 	.db #0x00
+   055C 00                 1536 	.db #0x00
+   055D 00                 1537 	.db #0x00
+   055E 01                 1538 	.db #0x01
+   055F 00                 1539 	.db #0x00
+   0560 07                 1540 	.db #0x07
+   0561 00                 1541 	.db #0x00
+   0562 0F                 1542 	.db #0x0F
+   0563 00                 1543 	.db #0x00
+   0564 1F                 1544 	.db #0x1F
+   0565 00                 1545 	.db #0x00
+   0566 0F                 1546 	.db #0x0F
+   0567 00                 1547 	.db #0x00
+   0568 1F                 1548 	.db #0x1F
+   0569 00                 1549 	.db #0x00
+   056A 7F                 1550 	.db #0x7F
+   056B 00                 1551 	.db #0x00
+   056C FF                 1552 	.db #0xFF
+   056D 00                 1553 	.db #0x00
+   056E FF                 1554 	.db #0xFF
+   056F 00                 1555 	.db #0x00
+   0570 FF                 1556 	.db #0xFF
+   0571 00                 1557 	.db #0x00
+   0572 FF                 1558 	.db #0xFF
+   0573 00                 1559 	.db #0x00
+   0574 FF                 1560 	.db #0xFF
+   0575 00                 1561 	.db #0x00
+   0576 FF                 1562 	.db #0xFF
+   0577 00                 1563 	.db #0x00
+   0578 FF                 1564 	.db #0xFF
+   0579 00                 1565 	.db #0x00
+   057A FF                 1566 	.db #0xFF
+   057B 00                 1567 	.db #0x00
+   057C FF                 1568 	.db #0xFF
+   057D 00                 1569 	.db #0x00
+   057E FF                 1570 	.db #0xFF
+   057F 00                 1571 	.db #0x00
+   0580 FF                 1572 	.db #0xFF
+   0581 00                 1573 	.db #0x00
+   0582 C3                 1574 	.db #0xC3
+   0583 3C                 1575 	.db #0x3C
+   0584 3C                 1576 	.db #0x3C
+   0585 FF                 1577 	.db #0xFF
+   0586 FF                 1578 	.db #0xFF
+   0587 00                 1579 	.db #0x00
+   0588 FF                 1580 	.db #0xFF
+   0589 00                 1581 	.db #0x00
+   058A FF                 1582 	.db #0xFF
+   058B 00                 1583 	.db #0x00
+   058C FF                 1584 	.db #0xFF
+   058D 00                 1585 	.db #0x00
+   058E FF                 1586 	.db #0xFF
+   058F 00                 1587 	.db #0x00
+   0590 FC                 1588 	.db #0xFC
+   0591 03                 1589 	.db #0x03
+   0592 D8                 1590 	.db #0xD8
+   0593 27                 1591 	.db #0x27
+   0594 00                 1592 	.db #0x00
+   0595 FF                 1593 	.db #0xFF
+   0596 FF                 1594 	.db #0xFF
+   0597 00                 1595 	.db #0x00
+   0598 FC                 1596 	.db #0xFC
+   0599 03                 1597 	.db #0x03
+   059A F8                 1598 	.db #0xF8
+   059B 07                 1599 	.db #0x07
+   059C F0                 1600 	.db #0xF0
+   059D 0F                 1601 	.db #0x0F
+   059E C0                 1602 	.db #0xC0
+   059F 3F                 1603 	.db #0x3F
+   05A0 00                 1604 	.db #0x00
+   05A1 FF                 1605 	.db #0xFF
+   05A2 00                 1606 	.db #0x00
+   05A3 FF                 1607 	.db #0xFF
+   05A4 00                 1608 	.db #0x00
+   05A5 FF                 1609 	.db #0xFF
+   05A6 01                 1610 	.db #0x01
+   05A7 FE                 1611 	.db #0xFE
+   05A8 00                 1612 	.db #0x00
+   05A9 FE                 1613 	.db #0xFE
+   05AA 02                 1614 	.db #0x02
+   05AB FC                 1615 	.db #0xFC
+   05AC 04                 1616 	.db #0x04
+   05AD F8                 1617 	.db #0xF8
+   05AE 00                 1618 	.db #0x00
+   05AF F8                 1619 	.db #0xF8
+   05B0 08                 1620 	.db #0x08
+   05B1 F0                 1621 	.db #0xF0
+   05B2 10                 1622 	.db #0x10
+   05B3 E0                 1623 	.db #0xE0
+   05B4 00                 1624 	.db #0x00
+   05B5 E0                 1625 	.db #0xE0
+   05B6 00                 1626 	.db #0x00
+   05B7 00                 1627 	.db #0x00
+   05B8 00                 1628 	.db #0x00
+   05B9 00                 1629 	.db #0x00
+   05BA 00                 1630 	.db #0x00
+   05BB 00                 1631 	.db #0x00
+   05BC 01                 1632 	.db #0x01
+   05BD 00                 1633 	.db #0x00
+   05BE 01                 1634 	.db #0x01
+   05BF 00                 1635 	.db #0x00
+   05C0 03                 1636 	.db #0x03
+   05C1 00                 1637 	.db #0x00
+   05C2 03                 1638 	.db #0x03
+   05C3 00                 1639 	.db #0x00
+   05C4 07                 1640 	.db #0x07
+   05C5 00                 1641 	.db #0x00
+   05C6 7F                 1642 	.db #0x7F
+   05C7 00                 1643 	.db #0x00
+   05C8 7F                 1644 	.db #0x7F
+   05C9 00                 1645 	.db #0x00
+   05CA FF                 1646 	.db #0xFF
+   05CB 00                 1647 	.db #0x00
+   05CC FF                 1648 	.db #0xFF
+   05CD 00                 1649 	.db #0x00
+   05CE FF                 1650 	.db #0xFF
+   05CF 00                 1651 	.db #0x00
+   05D0 FF                 1652 	.db #0xFF
+   05D1 00                 1653 	.db #0x00
+   05D2 FF                 1654 	.db #0xFF
+   05D3 00                 1655 	.db #0x00
+   05D4 FF                 1656 	.db #0xFF
+   05D5 00                 1657 	.db #0x00
+   05D6 FF                 1658 	.db #0xFF
+   05D7 00                 1659 	.db #0x00
+   05D8 FF                 1660 	.db #0xFF
+   05D9 00                 1661 	.db #0x00
+   05DA FF                 1662 	.db #0xFF
+   05DB 00                 1663 	.db #0x00
+   05DC FF                 1664 	.db #0xFF
+   05DD 00                 1665 	.db #0x00
+   05DE FF                 1666 	.db #0xFF
+   05DF 00                 1667 	.db #0x00
+   05E0 FF                 1668 	.db #0xFF
+   05E1 00                 1669 	.db #0x00
+   05E2 FE                 1670 	.db #0xFE
+   05E3 01                 1671 	.db #0x01
+   05E4 FE                 1672 	.db #0xFE
+   05E5 01                 1673 	.db #0x01
+   05E6 E0                 1674 	.db #0xE0
+   05E7 00                 1675 	.db #0x00
+   05E8 FC                 1676 	.db #0xFC
+   05E9 00                 1677 	.db #0x00
+   05EA EC                 1678 	.db #0xEC
+   05EB 1F                 1679 	.db #0x1F
+   05EC 9F                 1680 	.db #0x9F
+   05ED 7F                 1681 	.db #0x7F
+   05EE 3C                 1682 	.db #0x3C
+   05EF FF                 1683 	.db #0xFF
+   05F0 61                 1684 	.db #0x61
+   05F1 FF                 1685 	.db #0xFF
+   05F2 87                 1686 	.db #0x87
+   05F3 FF                 1687 	.db #0xFF
+   05F4 3F                 1688 	.db #0x3F
+   05F5 FF                 1689 	.db #0xFF
+   05F6 3F                 1690 	.db #0x3F
+   05F7 00                 1691 	.db #0x00
+   05F8 FF                 1692 	.db #0xFF
+   05F9 00                 1693 	.db #0x00
+   05FA FF                 1694 	.db #0xFF
+   05FB 00                 1695 	.db #0x00
+   05FC 7F                 1696 	.db #0x7F
+   05FD 80                 1697 	.db #0x80
+   05FE BF                 1698 	.db #0xBF
+   05FF C0                 1699 	.db #0xC0
+   0600 DF                 1700 	.db #0xDF
+   0601 E0                 1701 	.db #0xE0
+   0602 7F                 1702 	.db #0x7F
+   0603 E0                 1703 	.db #0xE0
+   0604 EF                 1704 	.db #0xEF
+   0605 F0                 1705 	.db #0xF0
+   0606 FE                 1706 	.db #0xFE
+   0607 01                 1707 	.db #0x01
+   0608 FD                 1708 	.db #0xFD
+   0609 03                 1709 	.db #0x03
+   060A FD                 1710 	.db #0xFD
+   060B 03                 1711 	.db #0x03
+   060C FB                 1712 	.db #0xFB
+   060D 07                 1713 	.db #0x07
+   060E FB                 1714 	.db #0xFB
+   060F 07                 1715 	.db #0x07
+   0610 EB                 1716 	.db #0xEB
+   0611 17                 1717 	.db #0x17
+   0612 DB                 1718 	.db #0xDB
+   0613 27                 1719 	.db #0x27
+   0614 FB                 1720 	.db #0xFB
+   0615 07                 1721 	.db #0x07
+   0616 FF                 1722 	.db #0xFF
+   0617 FF                 1723 	.db #0xFF
+   0618 FF                 1724 	.db #0xFF
+   0619 FF                 1725 	.db #0xFF
+   061A FF                 1726 	.db #0xFF
+   061B FF                 1727 	.db #0xFF
+   061C FF                 1728 	.db #0xFF
+   061D FF                 1729 	.db #0xFF
+   061E FF                 1730 	.db #0xFF
+   061F FF                 1731 	.db #0xFF
+   0620 FF                 1732 	.db #0xFF
+   0621 FF                 1733 	.db #0xFF
+   0622 FF                 1734 	.db #0xFF
+   0623 FF                 1735 	.db #0xFF
+   0624 FE                 1736 	.db #0xFE
+   0625 FF                 1737 	.db #0xFF
+   0626 00                 1738 	.db #0x00
+   0627 FF                 1739 	.db #0xFF
+   0628 80                 1740 	.db #0x80
+   0629 FF                 1741 	.db #0xFF
+   062A 80                 1742 	.db #0x80
+   062B FF                 1743 	.db #0xFF
+   062C 80                 1744 	.db #0x80
+   062D FF                 1745 	.db #0xFF
+   062E 80                 1746 	.db #0x80
+   062F FF                 1747 	.db #0xFF
+   0630 41                 1748 	.db #0x41
+   0631 BE                 1749 	.db #0xBE
+   0632 5F                 1750 	.db #0x5F
+   0633 A0                 1751 	.db #0xA0
+   0634 DE                 1752 	.db #0xDE
+   0635 21                 1753 	.db #0x21
+   0636 00                 1754 	.db #0x00
+   0637 FF                 1755 	.db #0xFF
+   0638 00                 1756 	.db #0x00
+   0639 FF                 1757 	.db #0xFF
+   063A 00                 1758 	.db #0x00
+   063B FF                 1759 	.db #0xFF
+   063C 00                 1760 	.db #0x00
+   063D FF                 1761 	.db #0xFF
+   063E 01                 1762 	.db #0x01
+   063F FE                 1763 	.db #0xFE
+   0640 02                 1764 	.db #0x02
+   0641 FC                 1765 	.db #0xFC
+   0642 04                 1766 	.db #0x04
+   0643 F8                 1767 	.db #0xF8
+   0644 08                 1768 	.db #0x08
+   0645 F0                 1769 	.db #0xF0
+   0646 20                 1770 	.db #0x20
+   0647 C0                 1771 	.db #0xC0
+   0648 40                 1772 	.db #0x40
+   0649 80                 1773 	.db #0x80
+   064A 80                 1774 	.db #0x80
+   064B 00                 1775 	.db #0x00
+   064C 00                 1776 	.db #0x00
+   064D 00                 1777 	.db #0x00
+   064E 00                 1778 	.db #0x00
+   064F 00                 1779 	.db #0x00
+   0650 00                 1780 	.db #0x00
+   0651 00                 1781 	.db #0x00
+   0652 00                 1782 	.db #0x00
+   0653 00                 1783 	.db #0x00
+   0654 00                 1784 	.db #0x00
+   0655 00                 1785 	.db #0x00
+   0656 07                 1786 	.db #0x07
+   0657 00                 1787 	.db #0x00
+   0658 0F                 1788 	.db #0x0F
+   0659 00                 1789 	.db #0x00
+   065A 0F                 1790 	.db #0x0F
+   065B 00                 1791 	.db #0x00
+   065C 1F                 1792 	.db #0x1F
+   065D 00                 1793 	.db #0x00
+   065E 1F                 1794 	.db #0x1F
+   065F 00                 1795 	.db #0x00
+   0660 3F                 1796 	.db #0x3F
+   0661 00                 1797 	.db #0x00
+   0662 3F                 1798 	.db #0x3F
+   0663 00                 1799 	.db #0x00
+   0664 7F                 1800 	.db #0x7F
+   0665 00                 1801 	.db #0x00
+   0666 FE                 1802 	.db #0xFE
+   0667 01                 1803 	.db #0x01
+   0668 FC                 1804 	.db #0xFC
+   0669 03                 1805 	.db #0x03
+   066A FE                 1806 	.db #0xFE
+   066B 01                 1807 	.db #0x01
+   066C FE                 1808 	.db #0xFE
+   066D 01                 1809 	.db #0x01
+   066E FF                 1810 	.db #0xFF
+   066F 00                 1811 	.db #0x00
+   0670 FF                 1812 	.db #0xFF
+   0671 00                 1813 	.db #0x00
+   0672 FF                 1814 	.db #0xFF
+   0673 00                 1815 	.db #0x00
+   0674 FF                 1816 	.db #0xFF
+   0675 00                 1817 	.db #0x00
+   0676 7B                 1818 	.db #0x7B
+   0677 FF                 1819 	.db #0xFF
+   0678 EF                 1820 	.db #0xEF
+   0679 FF                 1821 	.db #0xFF
+   067A F3                 1822 	.db #0xF3
+   067B FF                 1823 	.db #0xFF
+   067C 6F                 1824 	.db #0x6F
+   067D FF                 1825 	.db #0xFF
+   067E 1F                 1826 	.db #0x1F
+   067F FF                 1827 	.db #0xFF
+   0680 9F                 1828 	.db #0x9F
+   0681 7F                 1829 	.db #0x7F
+   0682 C1                 1830 	.db #0xC1
+   0683 3E                 1831 	.db #0x3E
+   0684 F1                 1832 	.db #0xF1
+   0685 00                 1833 	.db #0x00
+   0686 CF                 1834 	.db #0xCF
+   0687 F0                 1835 	.db #0xF0
+   0688 FF                 1836 	.db #0xFF
+   0689 E0                 1837 	.db #0xE0
+   068A FF                 1838 	.db #0xFF
+   068B E0                 1839 	.db #0xE0
+   068C DF                 1840 	.db #0xDF
+   068D E0                 1841 	.db #0xE0
+   068E BC                 1842 	.db #0xBC
+   068F C3                 1843 	.db #0xC3
+   0690 60                 1844 	.db #0x60
+   0691 9F                 1845 	.db #0x9F
+   0692 40                 1846 	.db #0x40
+   0693 3F                 1847 	.db #0x3F
+   0694 80                 1848 	.db #0x80
+   0695 7F                 1849 	.db #0x7F
+   0696 F5                 1850 	.db #0xF5
+   0697 0B                 1851 	.db #0x0B
+   0698 C2                 1852 	.db #0xC2
+   0699 3D                 1853 	.db #0x3D
+   069A 81                 1854 	.db #0x81
+   069B 7E                 1855 	.db #0x7E
+   069C 00                 1856 	.db #0x00
+   069D FF                 1857 	.db #0xFF
+   069E 00                 1858 	.db #0x00
+   069F FF                 1859 	.db #0xFF
+   06A0 00                 1860 	.db #0x00
+   06A1 FF                 1861 	.db #0xFF
+   06A2 00                 1862 	.db #0x00
+   06A3 FF                 1863 	.db #0xFF
+   06A4 00                 1864 	.db #0x00
+   06A5 FF                 1865 	.db #0xFF
+   06A6 FF                 1866 	.db #0xFF
+   06A7 FE                 1867 	.db #0xFE
+   06A8 FA                 1868 	.db #0xFA
+   06A9 FC                 1869 	.db #0xFC
+   06AA 05                 1870 	.db #0x05
+   06AB F8                 1871 	.db #0xF8
+   06AC CC                 1872 	.db #0xCC
+   06AD 33                 1873 	.db #0x33
+   06AE 00                 1874 	.db #0x00
+   06AF FF                 1875 	.db #0xFF
+   06B0 00                 1876 	.db #0x00
+   06B1 FF                 1877 	.db #0xFF
+   06B2 00                 1878 	.db #0x00
+   06B3 FF                 1879 	.db #0xFF
+   06B4 00                 1880 	.db #0x00
+   06B5 FF                 1881 	.db #0xFF
+   06B6 CC                 1882 	.db #0xCC
+   06B7 33                 1883 	.db #0x33
+   06B8 80                 1884 	.db #0x80
+   06B9 7F                 1885 	.db #0x7F
+   06BA 00                 1886 	.db #0x00
+   06BB FF                 1887 	.db #0xFF
+   06BC 00                 1888 	.db #0x00
+   06BD FF                 1889 	.db #0xFF
+   06BE 00                 1890 	.db #0x00
+   06BF FF                 1891 	.db #0xFF
+   06C0 00                 1892 	.db #0x00
+   06C1 FF                 1893 	.db #0xFF
+   06C2 00                 1894 	.db #0x00
+   06C3 FF                 1895 	.db #0xFF
+   06C4 00                 1896 	.db #0x00
+   06C5 FF                 1897 	.db #0xFF
+   06C6 00                 1898 	.db #0x00
+   06C7 FF                 1899 	.db #0xFF
+   06C8 00                 1900 	.db #0x00
+   06C9 FF                 1901 	.db #0xFF
+   06CA 00                 1902 	.db #0x00
+   06CB FF                 1903 	.db #0xFF
+   06CC 00                 1904 	.db #0x00
+   06CD FF                 1905 	.db #0xFF
+   06CE 00                 1906 	.db #0x00
+   06CF FF                 1907 	.db #0xFF
+   06D0 01                 1908 	.db #0x01
+   06D1 FE                 1909 	.db #0xFE
+   06D2 02                 1910 	.db #0x02
+   06D3 FC                 1911 	.db #0xFC
+   06D4 04                 1912 	.db #0x04
+   06D5 F8                 1913 	.db #0xF8
+   06D6 00                 1914 	.db #0x00
+   06D7 F0                 1915 	.db #0xF0
+   06D8 00                 1916 	.db #0x00
+   06D9 E0                 1917 	.db #0xE0
+   06DA 20                 1918 	.db #0x20
+   06DB C0                 1919 	.db #0xC0
+   06DC 40                 1920 	.db #0x40
+   06DD 80                 1921 	.db #0x80
+   06DE 80                 1922 	.db #0x80
+   06DF 00                 1923 	.db #0x00
+   06E0 00                 1924 	.db #0x00
+   06E1 00                 1925 	.db #0x00
+   06E2 00                 1926 	.db #0x00
+   06E3 00                 1927 	.db #0x00
+   06E4 00                 1928 	.db #0x00
+   06E5 00                 1929 	.db #0x00
+   06E6 00                 1930 	.db #0x00
+   06E7 00                 1931 	.db #0x00
+   06E8 00                 1932 	.db #0x00
+   06E9 00                 1933 	.db #0x00
+   06EA 00                 1934 	.db #0x00
+   06EB 00                 1935 	.db #0x00
+   06EC 00                 1936 	.db #0x00
+   06ED 00                 1937 	.db #0x00
+   06EE 00                 1938 	.db #0x00
+   06EF 00                 1939 	.db #0x00
+   06F0 00                 1940 	.db #0x00
+   06F1 00                 1941 	.db #0x00
+   06F2 01                 1942 	.db #0x01
+   06F3 00                 1943 	.db #0x00
+   06F4 01                 1944 	.db #0x01
+   06F5 00                 1945 	.db #0x00
+   06F6 7F                 1946 	.db #0x7F
+   06F7 00                 1947 	.db #0x00
+   06F8 7F                 1948 	.db #0x7F
+   06F9 00                 1949 	.db #0x00
+   06FA FF                 1950 	.db #0xFF
+   06FB 00                 1951 	.db #0x00
+   06FC FF                 1952 	.db #0xFF
+   06FD 00                 1953 	.db #0x00
+   06FE FF                 1954 	.db #0xFF
+   06FF 00                 1955 	.db #0x00
+   0700 7F                 1956 	.db #0x7F
+   0701 80                 1957 	.db #0x80
+   0702 7F                 1958 	.db #0x7F
+   0703 80                 1959 	.db #0x80
+   0704 FF                 1960 	.db #0xFF
+   0705 00                 1961 	.db #0x00
+   0706 FF                 1962 	.db #0xFF
+   0707 00                 1963 	.db #0x00
+   0708 FF                 1964 	.db #0xFF
+   0709 00                 1965 	.db #0x00
+   070A FF                 1966 	.db #0xFF
+   070B 00                 1967 	.db #0x00
+   070C FF                 1968 	.db #0xFF
+   070D 00                 1969 	.db #0x00
+   070E FF                 1970 	.db #0xFF
+   070F 00                 1971 	.db #0x00
+   0710 FF                 1972 	.db #0xFF
+   0711 00                 1973 	.db #0x00
+   0712 FE                 1974 	.db #0xFE
+   0713 01                 1975 	.db #0x01
+   0714 F0                 1976 	.db #0xF0
+   0715 0F                 1977 	.db #0x0F
+   0716 FF                 1978 	.db #0xFF
+   0717 00                 1979 	.db #0x00
+   0718 FF                 1980 	.db #0xFF
+   0719 00                 1981 	.db #0x00
+   071A FE                 1982 	.db #0xFE
+   071B 01                 1983 	.db #0x01
+   071C F0                 1984 	.db #0xF0
+   071D 0F                 1985 	.db #0x0F
+   071E E0                 1986 	.db #0xE0
+   071F 1F                 1987 	.db #0x1F
+   0720 80                 1988 	.db #0x80
+   0721 7F                 1989 	.db #0x7F
+   0722 00                 1990 	.db #0x00
+   0723 FF                 1991 	.db #0xFF
+   0724 00                 1992 	.db #0x00
+   0725 FF                 1993 	.db #0xFF
+   0726 C0                 1994 	.db #0xC0
+   0727 3F                 1995 	.db #0x3F
+   0728 80                 1996 	.db #0x80
+   0729 7F                 1997 	.db #0x7F
+   072A 00                 1998 	.db #0x00
+   072B FF                 1999 	.db #0xFF
+   072C 00                 2000 	.db #0x00
+   072D FF                 2001 	.db #0xFF
+   072E 00                 2002 	.db #0x00
+   072F FF                 2003 	.db #0xFF
+   0730 00                 2004 	.db #0x00
+   0731 FF                 2005 	.db #0xFF
+   0732 00                 2006 	.db #0x00
+   0733 FF                 2007 	.db #0xFF
+   0734 00                 2008 	.db #0x00
+   0735 FF                 2009 	.db #0xFF
+   0736 00                 2010 	.db #0x00
+   0737 FF                 2011 	.db #0xFF
+   0738 00                 2012 	.db #0x00
+   0739 FF                 2013 	.db #0xFF
+   073A 00                 2014 	.db #0x00
+   073B FF                 2015 	.db #0xFF
+   073C 00                 2016 	.db #0x00
+   073D FF                 2017 	.db #0xFF
+   073E 00                 2018 	.db #0x00
+   073F FF                 2019 	.db #0xFF
+   0740 01                 2020 	.db #0x01
+   0741 FF                 2021 	.db #0xFF
+   0742 03                 2022 	.db #0x03
+   0743 FF                 2023 	.db #0xFF
+   0744 07                 2024 	.db #0x07
+   0745 FF                 2025 	.db #0xFF
+   0746 00                 2026 	.db #0x00
+   0747 FF                 2027 	.db #0xFF
+   0748 00                 2028 	.db #0x00
+   0749 FF                 2029 	.db #0xFF
+   074A 00                 2030 	.db #0x00
+   074B FF                 2031 	.db #0xFF
+   074C 00                 2032 	.db #0x00
+   074D FF                 2033 	.db #0xFF
+   074E 78                 2034 	.db #0x78
+   074F FF                 2035 	.db #0xFF
+   0750 FE                 2036 	.db #0xFE
+   0751 FF                 2037 	.db #0xFF
+   0752 FF                 2038 	.db #0xFF
+   0753 FF                 2039 	.db #0xFF
+   0754 FF                 2040 	.db #0xFF
+   0755 FF                 2041 	.db #0xFF
+   0756 00                 2042 	.db #0x00
+   0757 FF                 2043 	.db #0xFF
+   0758 00                 2044 	.db #0x00
+   0759 FF                 2045 	.db #0xFF
+   075A 00                 2046 	.db #0x00
+   075B FF                 2047 	.db #0xFF
+   075C 00                 2048 	.db #0x00
+   075D FF                 2049 	.db #0xFF
+   075E 01                 2050 	.db #0x01
+   075F FE                 2051 	.db #0xFE
+   0760 02                 2052 	.db #0x02
+   0761 FC                 2053 	.db #0xFC
+   0762 04                 2054 	.db #0x04
+   0763 F8                 2055 	.db #0xF8
+   0764 10                 2056 	.db #0x10
+   0765 E0                 2057 	.db #0xE0
+   0766 08                 2058 	.db #0x08
+   0767 F0                 2059 	.db #0xF0
+   0768 10                 2060 	.db #0x10
+   0769 E0                 2061 	.db #0xE0
+   076A 20                 2062 	.db #0x20
+   076B C0                 2063 	.db #0xC0
+   076C 00                 2064 	.db #0x00
+   076D 80                 2065 	.db #0x80
+   076E 00                 2066 	.db #0x00
+   076F 00                 2067 	.db #0x00
+   0770 00                 2068 	.db #0x00
+   0771 00                 2069 	.db #0x00
+   0772 00                 2070 	.db #0x00
+   0773 00                 2071 	.db #0x00
+   0774 00                 2072 	.db #0x00
+   0775 00                 2073 	.db #0x00
+   0776 01                 2074 	.db #0x01
+   0777 00                 2075 	.db #0x00
+   0778 01                 2076 	.db #0x01
+   0779 00                 2077 	.db #0x00
+   077A 01                 2078 	.db #0x01
+   077B 00                 2079 	.db #0x00
+   077C 01                 2080 	.db #0x01
+   077D 00                 2081 	.db #0x00
+   077E 01                 2082 	.db #0x01
+   077F 00                 2083 	.db #0x00
+   0780 01                 2084 	.db #0x01
+   0781 00                 2085 	.db #0x00
+   0782 01                 2086 	.db #0x01
+   0783 00                 2087 	.db #0x00
+   0784 01                 2088 	.db #0x01
+   0785 00                 2089 	.db #0x00
+   0786 FF                 2090 	.db #0xFF
+   0787 00                 2091 	.db #0x00
+   0788 60                 2092 	.db #0x60
+   0789 9F                 2093 	.db #0x9F
+   078A 00                 2094 	.db #0x00
+   078B FF                 2095 	.db #0xFF
+   078C 00                 2096 	.db #0x00
+   078D FF                 2097 	.db #0xFF
+   078E 00                 2098 	.db #0x00
+   078F FF                 2099 	.db #0xFF
+   0790 00                 2100 	.db #0x00
+   0791 FF                 2101 	.db #0xFF
+   0792 00                 2102 	.db #0x00
+   0793 FF                 2103 	.db #0xFF
+   0794 00                 2104 	.db #0x00
+   0795 FF                 2105 	.db #0xFF
+   0796 C0                 2106 	.db #0xC0
+   0797 3F                 2107 	.db #0x3F
+   0798 00                 2108 	.db #0x00
+   0799 FF                 2109 	.db #0xFF
+   079A 00                 2110 	.db #0x00
+   079B FF                 2111 	.db #0xFF
+   079C 00                 2112 	.db #0x00
+   079D FF                 2113 	.db #0xFF
+   079E 00                 2114 	.db #0x00
+   079F FF                 2115 	.db #0xFF
+   07A0 00                 2116 	.db #0x00
+   07A1 FF                 2117 	.db #0xFF
+   07A2 00                 2118 	.db #0x00
+   07A3 FF                 2119 	.db #0xFF
+   07A4 00                 2120 	.db #0x00
+   07A5 FF                 2121 	.db #0xFF
+   07A6 00                 2122 	.db #0x00
+   07A7 FF                 2123 	.db #0xFF
+   07A8 0F                 2124 	.db #0x0F
+   07A9 FF                 2125 	.db #0xFF
+   07AA 3F                 2126 	.db #0x3F
+   07AB FF                 2127 	.db #0xFF
+   07AC 3F                 2128 	.db #0x3F
+   07AD FF                 2129 	.db #0xFF
+   07AE 3F                 2130 	.db #0x3F
+   07AF FF                 2131 	.db #0xFF
+   07B0 7F                 2132 	.db #0x7F
+   07B1 FF                 2133 	.db #0xFF
+   07B2 7F                 2134 	.db #0x7F
+   07B3 FF                 2135 	.db #0xFF
+   07B4 3F                 2136 	.db #0x3F
+   07B5 FF                 2137 	.db #0xFF
+   07B6 00                 2138 	.db #0x00
+   07B7 FF                 2139 	.db #0xFF
+   07B8 80                 2140 	.db #0x80
+   07B9 FF                 2141 	.db #0xFF
+   07BA E0                 2142 	.db #0xE0
+   07BB FF                 2143 	.db #0xFF
+   07BC F0                 2144 	.db #0xF0
+   07BD FF                 2145 	.db #0xFF
+   07BE F0                 2146 	.db #0xF0
+   07BF FF                 2147 	.db #0xFF
+   07C0 F8                 2148 	.db #0xF8
+   07C1 FF                 2149 	.db #0xFF
+   07C2 F0                 2150 	.db #0xF0
+   07C3 FF                 2151 	.db #0xFF
+   07C4 E0                 2152 	.db #0xE0
+   07C5 FF                 2153 	.db #0xFF
+   07C6 0F                 2154 	.db #0x0F
+   07C7 FF                 2155 	.db #0xFF
+   07C8 0F                 2156 	.db #0x0F
+   07C9 FF                 2157 	.db #0xFF
+   07CA 0F                 2158 	.db #0x0F
+   07CB FF                 2159 	.db #0xFF
+   07CC 07                 2160 	.db #0x07
+   07CD FF                 2161 	.db #0xFF
+   07CE 03                 2162 	.db #0x03
+   07CF FF                 2163 	.db #0xFF
+   07D0 01                 2164 	.db #0x01
+   07D1 FF                 2165 	.db #0xFF
+   07D2 00                 2166 	.db #0x00
+   07D3 FF                 2167 	.db #0xFF
+   07D4 00                 2168 	.db #0x00
+   07D5 FF                 2169 	.db #0xFF
+   07D6 FF                 2170 	.db #0xFF
+   07D7 FF                 2171 	.db #0xFF
+   07D8 FF                 2172 	.db #0xFF
+   07D9 FF                 2173 	.db #0xFF
+   07DA F9                 2174 	.db #0xF9
+   07DB FF                 2175 	.db #0xFF
+   07DC F8                 2176 	.db #0xF8
+   07DD FF                 2177 	.db #0xFF
+   07DE F8                 2178 	.db #0xF8
+   07DF FF                 2179 	.db #0xFF
+   07E0 E0                 2180 	.db #0xE0
+   07E1 FF                 2181 	.db #0xFF
+   07E2 00                 2182 	.db #0x00
+   07E3 FF                 2183 	.db #0xFF
+   07E4 01                 2184 	.db #0x01
+   07E5 FE                 2185 	.db #0xFE
+   07E6 80                 2186 	.db #0x80
+   07E7 FF                 2187 	.db #0xFF
+   07E8 80                 2188 	.db #0x80
+   07E9 FF                 2189 	.db #0xFF
+   07EA 01                 2190 	.db #0x01
+   07EB FE                 2191 	.db #0xFE
+   07EC 02                 2192 	.db #0x02
+   07ED FC                 2193 	.db #0xFC
+   07EE 08                 2194 	.db #0x08
+   07EF F0                 2195 	.db #0xF0
+   07F0 20                 2196 	.db #0x20
+   07F1 C0                 2197 	.db #0xC0
+   07F2 40                 2198 	.db #0x40
+   07F3 80                 2199 	.db #0x80
+   07F4 00                 2200 	.db #0x00
+   07F5 00                 2201 	.db #0x00
+   07F6 20                 2202 	.db #0x20
+   07F7 C0                 2203 	.db #0xC0
+   07F8 00                 2204 	.db #0x00
+   07F9 80                 2205 	.db #0x80
+   07FA 00                 2206 	.db #0x00
+   07FB 00                 2207 	.db #0x00
+   07FC 00                 2208 	.db #0x00
+   07FD 00                 2209 	.db #0x00
+   07FE 00                 2210 	.db #0x00
+   07FF 00                 2211 	.db #0x00
+   0800 00                 2212 	.db #0x00
+   0801 00                 2213 	.db #0x00
+   0802 00                 2214 	.db #0x00
+   0803 00                 2215 	.db #0x00
+   0804 00                 2216 	.db #0x00
+   0805 00                 2217 	.db #0x00
+   0806 00                 2218 	.db #0x00
+   0807 FF                 2219 	.db #0xFF
+   0808 00                 2220 	.db #0x00
+   0809 FF                 2221 	.db #0xFF
+   080A 80                 2222 	.db #0x80
+   080B 7F                 2223 	.db #0x7F
+   080C 00                 2224 	.db #0x00
+   080D 7F                 2225 	.db #0x7F
+   080E 10                 2226 	.db #0x10
+   080F 3F                 2227 	.db #0x3F
+   0810 37                 2228 	.db #0x37
+   0811 1F                 2229 	.db #0x1F
+   0812 1B                 2230 	.db #0x1B
+   0813 0F                 2231 	.db #0x0F
+   0814 0F                 2232 	.db #0x0F
+   0815 07                 2233 	.db #0x07
+   0816 00                 2234 	.db #0x00
+   0817 FF                 2235 	.db #0xFF
+   0818 00                 2236 	.db #0x00
+   0819 FF                 2237 	.db #0xFF
+   081A 00                 2238 	.db #0x00
+   081B FF                 2239 	.db #0xFF
+   081C 02                 2240 	.db #0x02
+   081D FF                 2241 	.db #0xFF
+   081E BF                 2242 	.db #0xBF
+   081F FF                 2243 	.db #0xFF
+   0820 FF                 2244 	.db #0xFF
+   0821 FF                 2245 	.db #0xFF
+   0822 FF                 2246 	.db #0xFF
+   0823 FF                 2247 	.db #0xFF
+   0824 FF                 2248 	.db #0xFF
+   0825 FF                 2249 	.db #0xFF
+   0826 1F                 2250 	.db #0x1F
+   0827 FF                 2251 	.db #0xFF
+   0828 1F                 2252 	.db #0x1F
+   0829 FF                 2253 	.db #0xFF
+   082A 23                 2254 	.db #0x23
+   082B DC                 2255 	.db #0xDC
+   082C 5E                 2256 	.db #0x5E
+   082D E0                 2257 	.db #0xE0
+   082E F0                 2258 	.db #0xF0
+   082F FF                 2259 	.db #0xFF
+   0830 FF                 2260 	.db #0xFF
+   0831 FF                 2261 	.db #0xFF
+   0832 FF                 2262 	.db #0xFF
+   0833 FF                 2263 	.db #0xFF
+   0834 FF                 2264 	.db #0xFF
+   0835 FF                 2265 	.db #0xFF
+   0836 D0                 2266 	.db #0xD0
+   0837 EF                 2267 	.db #0xEF
+   0838 70                 2268 	.db #0x70
+   0839 8F                 2269 	.db #0x8F
+   083A C0                 2270 	.db #0xC0
+   083B 3F                 2271 	.db #0x3F
+   083C 90                 2272 	.db #0x90
+   083D 7F                 2273 	.db #0x7F
+   083E 3E                 2274 	.db #0x3E
+   083F FF                 2275 	.db #0xFF
+   0840 FE                 2276 	.db #0xFE
+   0841 FF                 2277 	.db #0xFF
+   0842 FD                 2278 	.db #0xFD
+   0843 FE                 2279 	.db #0xFE
+   0844 2C                 2280 	.db #0x2C
+   0845 F0                 2281 	.db #0xF0
+   0846 00                 2282 	.db #0x00
+   0847 FF                 2283 	.db #0xFF
+   0848 00                 2284 	.db #0x00
+   0849 FF                 2285 	.db #0xFF
+   084A 00                 2286 	.db #0x00
+   084B FF                 2287 	.db #0xFF
+   084C 01                 2288 	.db #0x01
+   084D FE                 2289 	.db #0xFE
+   084E 44                 2290 	.db #0x44
+   084F F8                 2291 	.db #0xF8
+   0850 A0                 2292 	.db #0xA0
+   0851 C0                 2293 	.db #0xC0
+   0852 80                 2294 	.db #0x80
+   0853 00                 2295 	.db #0x00
+   0854 00                 2296 	.db #0x00
+   0855 00                 2297 	.db #0x00
+   0856 04                 2298 	.db #0x04
+   0857 F8                 2299 	.db #0xF8
+   0858 10                 2300 	.db #0x10
+   0859 E0                 2301 	.db #0xE0
+   085A 40                 2302 	.db #0x40
+   085B 80                 2303 	.db #0x80
+   085C 00                 2304 	.db #0x00
+   085D 00                 2305 	.db #0x00
+   085E 00                 2306 	.db #0x00
+   085F 00                 2307 	.db #0x00
+   0860 00                 2308 	.db #0x00
+   0861 00                 2309 	.db #0x00
+   0862 00                 2310 	.db #0x00
+   0863 00                 2311 	.db #0x00
+   0864 00                 2312 	.db #0x00
+   0865 00                 2313 	.db #0x00
+   0866 03                 2314 	.db #0x03
+   0867 01                 2315 	.db #0x01
+   0868 00                 2316 	.db #0x00
+   0869 00                 2317 	.db #0x00
+   086A 00                 2318 	.db #0x00
+   086B 00                 2319 	.db #0x00
+   086C 00                 2320 	.db #0x00
+   086D 00                 2321 	.db #0x00
+   086E 00                 2322 	.db #0x00
+   086F 00                 2323 	.db #0x00
+   0870 00                 2324 	.db #0x00
+   0871 00                 2325 	.db #0x00
+   0872 9A                 2326 	.db #0x9A
+   0873 4C                 2327 	.db #0x4C
+   0874 E3                 2328 	.db #0xE3
+   0875 42                 2329 	.db #0x42
+   0876 FF                 2330 	.db #0xFF
+   0877 FF                 2331 	.db #0xFF
+   0878 9F                 2332 	.db #0x9F
+   0879 7F                 2333 	.db #0x7F
+   087A 20                 2334 	.db #0x20
+   087B 10                 2335 	.db #0x10
+   087C 20                 2336 	.db #0x20
+   087D 10                 2337 	.db #0x10
+   087E 20                 2338 	.db #0x20
+   087F 10                 2339 	.db #0x10
+   0880 20                 2340 	.db #0x20
+   0881 10                 2341 	.db #0x10
+   0882 21                 2342 	.db #0x21
+   0883 10                 2343 	.db #0x10
+   0884 23                 2344 	.db #0x23
+   0885 10                 2345 	.db #0x10
+   0886 FE                 2346 	.db #0xFE
+   0887 FF                 2347 	.db #0xFF
+   0888 EE                 2348 	.db #0xEE
+   0889 F0                 2349 	.db #0xF0
+   088A 00                 2350 	.db #0x00
+   088B 00                 2351 	.db #0x00
+   088C 00                 2352 	.db #0x00
+   088D 00                 2353 	.db #0x00
+   088E 00                 2354 	.db #0x00
+   088F 00                 2355 	.db #0x00
+   0890 00                 2356 	.db #0x00
+   0891 00                 2357 	.db #0x00
+   0892 50                 2358 	.db #0x50
+   0893 E0                 2359 	.db #0xE0
+   0894 10                 2360 	.db #0x10
+   0895 08                 2361 	.db #0x08
+   0896 40                 2362 	.db #0x40
+   0897 80                 2363 	.db #0x80
+   0898 00                 2364 	.db #0x00
+   0899 00                 2365 	.db #0x00
+   089A 00                 2366 	.db #0x00
+   089B 00                 2367 	.db #0x00
+   089C 00                 2368 	.db #0x00
+   089D 00                 2369 	.db #0x00
+   089E 00                 2370 	.db #0x00
+   089F 00                 2371 	.db #0x00
+   08A0 00                 2372 	.db #0x00
+   08A1 00                 2373 	.db #0x00
+   08A2 83                 2374 	.db #0x83
+   08A3 80                 2375 	.db #0x80
+   08A4 42                 2376 	.db #0x42
+   08A5 82                 2377 	.db #0x82
+   08A6 00                 2378 	.db #0x00
+   08A7 00                 2379 	.db #0x00
+   08A8 00                 2380 	.db #0x00
+   08A9 00                 2381 	.db #0x00
+   08AA 00                 2382 	.db #0x00
+   08AB 00                 2383 	.db #0x00
+   08AC 01                 2384 	.db #0x01
+   08AD 00                 2385 	.db #0x00
+   08AE 01                 2386 	.db #0x01
+   08AF 00                 2387 	.db #0x00
+   08B0 01                 2388 	.db #0x01
+   08B1 00                 2389 	.db #0x00
+   08B2 03                 2390 	.db #0x03
+   08B3 01                 2391 	.db #0x01
+   08B4 01                 2392 	.db #0x01
+   08B5 00                 2393 	.db #0x00
+   08B6 00                 2394 	.db #0x00
+   08B7 00                 2395 	.db #0x00
+   08B8 00                 2396 	.db #0x00
+   08B9 00                 2397 	.db #0x00
+   08BA 04                 2398 	.db #0x04
+   08BB 02                 2399 	.db #0x02
+   08BC 04                 2400 	.db #0x04
+   08BD 82                 2401 	.db #0x82
+   08BE 04                 2402 	.db #0x04
+   08BF 82                 2403 	.db #0x82
+   08C0 04                 2404 	.db #0x04
+   08C1 82                 2405 	.db #0x82
+   08C2 F4                 2406 	.db #0xF4
+   08C3 F2                 2407 	.db #0xF2
+   08C4 07                 2408 	.db #0x07
+   08C5 82                 2409 	.db #0x82
+   08C6 00                 2410 	.db #0x00
+   08C7 00                 2411 	.db #0x00
+   08C8 00                 2412 	.db #0x00
+   08C9 00                 2413 	.db #0x00
+   08CA 00                 2414 	.db #0x00
+   08CB 00                 2415 	.db #0x00
+   08CC 00                 2416 	.db #0x00
+   08CD 00                 2417 	.db #0x00
+   08CE 00                 2418 	.db #0x00
+   08CF 00                 2419 	.db #0x00
+   08D0 00                 2420 	.db #0x00
+   08D1 00                 2421 	.db #0x00
+   08D2 D0                 2422 	.db #0xD0
+   08D3 60                 2423 	.db #0x60
+   08D4 10                 2424 	.db #0x10
+   08D5 10                 2425 	.db #0x10
+   08D6 00                 2426 	.db #0x00
+   08D7 00                 2427 	.db #0x00
+   08D8 00                 2428 	.db #0x00
+   08D9 00                 2429 	.db #0x00
+   08DA 00                 2430 	.db #0x00
+   08DB 00                 2431 	.db #0x00
+   08DC 00                 2432 	.db #0x00
+   08DD 00                 2433 	.db #0x00
+   08DE 00                 2434 	.db #0x00
+   08DF 00                 2435 	.db #0x00
+   08E0 00                 2436 	.db #0x00
+   08E1 00                 2437 	.db #0x00
+   08E2 58                 2438 	.db #0x58
+   08E3 30                 2439 	.db #0x30
+   08E4 C8                 2440 	.db #0xC8
+   08E5 84                 2441 	.db #0x84
+   08E6 82                 2442 	.db #0x82
+   08E7 41                 2443 	.db #0x41
+   08E8 83                 2444 	.db #0x83
+   08E9 41                 2445 	.db #0x41
+   08EA 83                 2446 	.db #0x83
+   08EB 41                 2447 	.db #0x41
+   08EC 83                 2448 	.db #0x83
+   08ED 41                 2449 	.db #0x41
+   08EE 81                 2450 	.db #0x81
+   08EF 42                 2451 	.db #0x42
+   08F0 C6                 2452 	.db #0xC6
+   08F1 42                 2453 	.db #0x42
+   08F2 AC                 2454 	.db #0xAC
+   08F3 58                 2455 	.db #0x58
+   08F4 80                 2456 	.db #0x80
+   08F5 40                 2457 	.db #0x40
+   08F6 20                 2458 	.db #0x20
+   08F7 10                 2459 	.db #0x10
+   08F8 20                 2460 	.db #0x20
+   08F9 10                 2461 	.db #0x10
+   08FA 23                 2462 	.db #0x23
+   08FB 11                 2463 	.db #0x11
+   08FC 23                 2464 	.db #0x23
+   08FD 12                 2465 	.db #0x12
+   08FE 22                 2466 	.db #0x22
+   08FF 12                 2467 	.db #0x12
+   0900 21                 2468 	.db #0x21
+   0901 12                 2469 	.db #0x12
+   0902 21                 2470 	.db #0x21
+   0903 10                 2471 	.db #0x10
+   0904 00                 2472 	.db #0x00
+   0905 00                 2473 	.db #0x00
+   0906 08                 2474 	.db #0x08
+   0907 08                 2475 	.db #0x08
+   0908 98                 2476 	.db #0x98
+   0909 78                 2477 	.db #0x78
+   090A 88                 2478 	.db #0x88
+   090B 08                 2479 	.db #0x08
+   090C 08                 2480 	.db #0x08
+   090D 08                 2481 	.db #0x08
+   090E 08                 2482 	.db #0x08
+   090F 08                 2483 	.db #0x08
+   0910 08                 2484 	.db #0x08
+   0911 18                 2485 	.db #0x18
+   0912 28                 2486 	.db #0x28
+   0913 C8                 2487 	.db #0xC8
+   0914 00                 2488 	.db #0x00
+   0915 00                 2489 	.db #0x00
+   0916 C4                 2490 	.db #0xC4
+   0917 42                 2491 	.db #0x42
+   0918 62                 2492 	.db #0x62
+   0919 44                 2493 	.db #0x44
+   091A 4C                 2494 	.db #0x4C
+   091B 24                 2495 	.db #0x24
+   091C 24                 2496 	.db #0x24
+   091D 28                 2497 	.db #0x28
+   091E 08                 2498 	.db #0x08
+   091F 38                 2499 	.db #0x38
+   0920 30                 2500 	.db #0x30
+   0921 18                 2501 	.db #0x18
+   0922 18                 2502 	.db #0x18
+   0923 10                 2503 	.db #0x10
+   0924 20                 2504 	.db #0x20
+   0925 10                 2505 	.db #0x10
+   0926 01                 2506 	.db #0x01
+   0927 00                 2507 	.db #0x00
+   0928 01                 2508 	.db #0x01
+   0929 00                 2509 	.db #0x00
+   092A 01                 2510 	.db #0x01
+   092B 00                 2511 	.db #0x00
+   092C 01                 2512 	.db #0x01
+   092D 00                 2513 	.db #0x00
+   092E 01                 2514 	.db #0x01
+   092F 00                 2515 	.db #0x00
+   0930 00                 2516 	.db #0x00
+   0931 00                 2517 	.db #0x00
+   0932 00                 2518 	.db #0x00
+   0933 00                 2519 	.db #0x00
+   0934 00                 2520 	.db #0x00
+   0935 00                 2521 	.db #0x00
+   0936 04                 2522 	.db #0x04
+   0937 82                 2523 	.db #0x82
+   0938 04                 2524 	.db #0x04
+   0939 82                 2525 	.db #0x82
+   093A 04                 2526 	.db #0x04
+   093B 82                 2527 	.db #0x82
+   093C 04                 2528 	.db #0x04
+   093D 82                 2529 	.db #0x82
+   093E 84                 2530 	.db #0x84
+   093F 82                 2531 	.db #0x82
+   0940 C4                 2532 	.db #0xC4
+   0941 82                 2533 	.db #0x82
+   0942 A4                 2534 	.db #0xA4
+   0943 72                 2535 	.db #0x72
+   0944 00                 2536 	.db #0x00
+   0945 00                 2537 	.db #0x00
+   0946 09                 2538 	.db #0x09
+   0947 10                 2539 	.db #0x10
+   0948 19                 2540 	.db #0x19
+   0949 01                 2541 	.db #0x01
+   094A 19                 2542 	.db #0x19
+   094B 01                 2543 	.db #0x01
+   094C 19                 2544 	.db #0x19
+   094D 01                 2545 	.db #0x01
+   094E 18                 2546 	.db #0x18
+   094F 01                 2547 	.db #0x01
+   0950 18                 2548 	.db #0x18
+   0951 00                 2549 	.db #0x00
+   0952 18                 2550 	.db #0x18
+   0953 00                 2551 	.db #0x00
+   0954 00                 2552 	.db #0x00
+   0955 00                 2553 	.db #0x00
+   0956 82                 2554 	.db #0x82
+   0957 04                 2555 	.db #0x04
+   0958 86                 2556 	.db #0x86
+   0959 00                 2557 	.db #0x00
+   095A FE                 2558 	.db #0xFE
+   095B FC                 2559 	.db #0xFC
+   095C 80                 2560 	.db #0x80
+   095D 00                 2561 	.db #0x00
+   095E 80                 2562 	.db #0x80
+   095F 00                 2563 	.db #0x00
+   0960 C6                 2564 	.db #0xC6
+   0961 80                 2565 	.db #0x80
+   0962 54                 2566 	.db #0x54
+   0963 38                 2567 	.db #0x38
+   0964 00                 2568 	.db #0x00
+   0965 00                 2569 	.db #0x00
+   0966 80                 2570 	.db #0x80
+   0967 40                 2571 	.db #0x40
+   0968 80                 2572 	.db #0x80
+   0969 40                 2573 	.db #0x40
+   096A 00                 2574 	.db #0x00
+   096B 00                 2575 	.db #0x00
+   096C 00                 2576 	.db #0x00
+   096D 00                 2577 	.db #0x00
+   096E 00                 2578 	.db #0x00
+   096F 00                 2579 	.db #0x00
+   0970 00                 2580 	.db #0x00
+   0971 00                 2581 	.db #0x00
+   0972 00                 2582 	.db #0x00
+   0973 00                 2583 	.db #0x00
+   0974 00                 2584 	.db #0x00
+   0975 00                 2585 	.db #0x00
+   0976 10                 2586 	.db #0x10
+   0977 20                 2587 	.db #0x20
+   0978 60                 2588 	.db #0x60
+   0979 20                 2589 	.db #0x20
+   097A 00                 2590 	.db #0x00
+   097B 00                 2591 	.db #0x00
+   097C 00                 2592 	.db #0x00
+   097D 00                 2593 	.db #0x00
+   097E 00                 2594 	.db #0x00
+   097F 00                 2595 	.db #0x00
+   0980 00                 2596 	.db #0x00
+   0981 00                 2597 	.db #0x00
+   0982 00                 2598 	.db #0x00
+   0983 00                 2599 	.db #0x00
+   0984 00                 2600 	.db #0x00
+   0985 00                 2601 	.db #0x00
+   0986 00                 2602 	.db #0x00
+   0987 00                 2603 	.db #0x00
+   0988 00                 2604 	.db #0x00
+   0989 00                 2605 	.db #0x00
+   098A 00                 2606 	.db #0x00
+   098B 00                 2607 	.db #0x00
+   098C 00                 2608 	.db #0x00
+   098D 00                 2609 	.db #0x00
+   098E 00                 2610 	.db #0x00
+   098F 00                 2611 	.db #0x00
+   0990 00                 2612 	.db #0x00
+   0991 00                 2613 	.db #0x00
+   0992 00                 2614 	.db #0x00
+   0993 00                 2615 	.db #0x00
+   0994 80                 2616 	.db #0x80
+   0995 40                 2617 	.db #0x40
+   0996 00                 2618 	.db #0x00
+   0997 00                 2619 	.db #0x00
+   0998 00                 2620 	.db #0x00
+   0999 00                 2621 	.db #0x00
+   099A 00                 2622 	.db #0x00
+   099B 00                 2623 	.db #0x00
+   099C 34                 2624 	.db #0x34
+   099D 18                 2625 	.db #0x18
+   099E 64                 2626 	.db #0x64
+   099F 42                 2627 	.db #0x42
+   09A0 41                 2628 	.db #0x41
+   09A1 82                 2629 	.db #0x82
+   09A2 C2                 2630 	.db #0xC2
+   09A3 81                 2631 	.db #0x81
+   09A4 82                 2632 	.db #0x82
+   09A5 81                 2633 	.db #0x81
+   09A6 00                 2634 	.db #0x00
+   09A7 00                 2635 	.db #0x00
+   09A8 00                 2636 	.db #0x00
+   09A9 00                 2637 	.db #0x00
+   09AA 00                 2638 	.db #0x00
+   09AB 00                 2639 	.db #0x00
+   09AC 08                 2640 	.db #0x08
+   09AD 07                 2641 	.db #0x07
+   09AE 18                 2642 	.db #0x18
+   09AF 10                 2643 	.db #0x10
+   09B0 10                 2644 	.db #0x10
+   09B1 20                 2645 	.db #0x20
+   09B2 30                 2646 	.db #0x30
+   09B3 20                 2647 	.db #0x20
+   09B4 20                 2648 	.db #0x20
+   09B5 20                 2649 	.db #0x20
+   09B6 00                 2650 	.db #0x00
+   09B7 00                 2651 	.db #0x00
+   09B8 00                 2652 	.db #0x00
+   09B9 00                 2653 	.db #0x00
+   09BA 00                 2654 	.db #0x00
+   09BB 00                 2655 	.db #0x00
+   09BC 95                 2656 	.db #0x95
+   09BD 0E                 2657 	.db #0x0E
+   09BE B1                 2658 	.db #0xB1
+   09BF 00                 2659 	.db #0x00
+   09C0 00                 2660 	.db #0x00
+   09C1 00                 2661 	.db #0x00
+   09C2 09                 2662 	.db #0x09
+   09C3 07                 2663 	.db #0x07
+   09C4 38                 2664 	.db #0x38
+   09C5 10                 2665 	.db #0x10
+   09C6 00                 2666 	.db #0x00
+   09C7 00                 2667 	.db #0x00
+   09C8 00                 2668 	.db #0x00
+   09C9 00                 2669 	.db #0x00
+   09CA 00                 2670 	.db #0x00
+   09CB 00                 2671 	.db #0x00
+   09CC 09                 2672 	.db #0x09
+   09CD 04                 2673 	.db #0x04
+   09CE 0E                 2674 	.db #0x0E
+   09CF 84                 2675 	.db #0x84
+   09D0 88                 2676 	.db #0x88
+   09D1 84                 2677 	.db #0x84
+   09D2 88                 2678 	.db #0x88
+   09D3 84                 2679 	.db #0x84
+   09D4 88                 2680 	.db #0x88
+   09D5 84                 2681 	.db #0x84
+   09D6 18                 2682 	.db #0x18
+   09D7 08                 2683 	.db #0x08
+   09D8 18                 2684 	.db #0x18
+   09D9 08                 2685 	.db #0x08
+   09DA 00                 2686 	.db #0x00
+   09DB 00                 2687 	.db #0x00
+   09DC 91                 2688 	.db #0x91
+   09DD C8                 2689 	.db #0xC8
+   09DE 11                 2690 	.db #0x11
+   09DF 08                 2691 	.db #0x08
+   09E0 11                 2692 	.db #0x11
+   09E1 08                 2693 	.db #0x08
+   09E2 11                 2694 	.db #0x11
+   09E3 08                 2695 	.db #0x08
+   09E4 11                 2696 	.db #0x11
+   09E5 08                 2697 	.db #0x08
+   09E6 00                 2698 	.db #0x00
+   09E7 00                 2699 	.db #0x00
+   09E8 00                 2700 	.db #0x00
+   09E9 00                 2701 	.db #0x00
+   09EA 00                 2702 	.db #0x00
+   09EB 00                 2703 	.db #0x00
+   09EC 34                 2704 	.db #0x34
+   09ED 98                 2705 	.db #0x98
+   09EE C4                 2706 	.db #0xC4
+   09EF 84                 2707 	.db #0x84
+   09F0 02                 2708 	.db #0x02
+   09F1 84                 2709 	.db #0x84
+   09F2 06                 2710 	.db #0x06
+   09F3 80                 2711 	.db #0x80
+   09F4 06                 2712 	.db #0x06
+   09F5 80                 2713 	.db #0x80
+   09F6 00                 2714 	.db #0x00
+   09F7 00                 2715 	.db #0x00
+   09F8 00                 2716 	.db #0x00
+   09F9 00                 2717 	.db #0x00
+   09FA 00                 2718 	.db #0x00
+   09FB 00                 2719 	.db #0x00
+   09FC 2A                 2720 	.db #0x2A
+   09FD 1C                 2721 	.db #0x1C
+   09FE 62                 2722 	.db #0x62
+   09FF 01                 2723 	.db #0x01
+   0A00 01                 2724 	.db #0x01
+   0A01 01                 2725 	.db #0x01
+   0A02 13                 2726 	.db #0x13
+   0A03 0F                 2727 	.db #0x0F
+   0A04 71                 2728 	.db #0x71
+   0A05 21                 2729 	.db #0x21
+   0A06 00                 2730 	.db #0x00
+   0A07 00                 2731 	.db #0x00
+   0A08 00                 2732 	.db #0x00
+   0A09 00                 2733 	.db #0x00
+   0A0A 00                 2734 	.db #0x00
+   0A0B 00                 2735 	.db #0x00
+   0A0C 42                 2736 	.db #0x42
+   0A0D 42                 2737 	.db #0x42
+   0A0E 27                 2738 	.db #0x27
+   0A0F 42                 2739 	.db #0x42
+   0A10 63                 2740 	.db #0x63
+   0A11 05                 2741 	.db #0x05
+   0A12 64                 2742 	.db #0x64
+   0A13 25                 2743 	.db #0x25
+   0A14 2D                 2744 	.db #0x2D
+   0A15 20                 2745 	.db #0x20
+   0A16 03                 2746 	.db #0x03
+   0A17 01                 2747 	.db #0x01
+   0A18 03                 2748 	.db #0x03
+   0A19 01                 2749 	.db #0x01
+   0A1A 00                 2750 	.db #0x00
+   0A1B 00                 2751 	.db #0x00
+   0A1C 12                 2752 	.db #0x12
+   0A1D 11                 2753 	.db #0x11
+   0A1E 12                 2754 	.db #0x12
+   0A1F 11                 2755 	.db #0x11
+   0A20 22                 2756 	.db #0x22
+   0A21 11                 2757 	.db #0x11
+   0A22 12                 2758 	.db #0x12
+   0A23 21                 2759 	.db #0x21
+   0A24 A2                 2760 	.db #0xA2
+   0A25 21                 2761 	.db #0x21
+   0A26 20                 2762 	.db #0x20
+   0A27 10                 2763 	.db #0x10
+   0A28 20                 2764 	.db #0x20
+   0A29 10                 2765 	.db #0x10
+   0A2A 20                 2766 	.db #0x20
+   0A2B 10                 2767 	.db #0x10
+   0A2C 7E                 2768 	.db #0x7E
+   0A2D 3E                 2769 	.db #0x3E
+   0A2E 20                 2770 	.db #0x20
+   0A2F 10                 2771 	.db #0x10
+   0A30 20                 2772 	.db #0x20
+   0A31 10                 2773 	.db #0x10
+   0A32 20                 2774 	.db #0x20
+   0A33 10                 2775 	.db #0x10
+   0A34 20                 2776 	.db #0x20
+   0A35 10                 2777 	.db #0x10
+   0A36 80                 2778 	.db #0x80
+   0A37 40                 2779 	.db #0x40
+   0A38 80                 2780 	.db #0x80
+   0A39 40                 2781 	.db #0x40
+   0A3A 80                 2782 	.db #0x80
+   0A3B 40                 2783 	.db #0x40
+   0A3C 9A                 2784 	.db #0x9A
+   0A3D 4C                 2785 	.db #0x4C
+   0A3E E2                 2786 	.db #0xE2
+   0A3F 42                 2787 	.db #0x42
+   0A40 81                 2788 	.db #0x81
+   0A41 42                 2789 	.db #0x42
+   0A42 83                 2790 	.db #0x83
+   0A43 40                 2791 	.db #0x40
+   0A44 83                 2792 	.db #0x83
+   0A45 40                 2793 	.db #0x40
+   0A46 00                 2794 	.db #0x00
+   0A47 00                 2795 	.db #0x00
+   0A48 00                 2796 	.db #0x00
+   0A49 00                 2797 	.db #0x00
+   0A4A 00                 2798 	.db #0x00
+   0A4B 00                 2799 	.db #0x00
+   0A4C 00                 2800 	.db #0x00
+   0A4D 00                 2801 	.db #0x00
+   0A4E 07                 2802 	.db #0x07
+   0A4F 0F                 2803 	.db #0x0F
+   0A50 0F                 2804 	.db #0x0F
+   0A51 09                 2805 	.db #0x09
+   0A52 0F                 2806 	.db #0x0F
+   0A53 09                 2807 	.db #0x09
+   0A54 07                 2808 	.db #0x07
+   0A55 0F                 2809 	.db #0x0F
+   0A56 70                 2810 	.db #0x70
+   0A57 E0                 2811 	.db #0xE0
+   0A58 F0                 2812 	.db #0xF0
+   0A59 90                 2813 	.db #0x90
+   0A5A F0                 2814 	.db #0xF0
+   0A5B 90                 2815 	.db #0x90
+   0A5C 90                 2816 	.db #0x90
+   0A5D F0                 2817 	.db #0xF0
+   0A5E FF                 2818 	.db #0xFF
+   0A5F FE                 2819 	.db #0xFE
+   0A60 FF                 2820 	.db #0xFF
+   0A61 9A                 2821 	.db #0x9A
+   0A62 FF                 2822 	.db #0xFF
+   0A63 9A                 2823 	.db #0x9A
+   0A64 FF                 2824 	.db #0xFF
+   0A65 FE                 2825 	.db #0xFE
+   0A66 02                 2826 	.db #0x02
+   0A67 01                 2827 	.db #0x01
+   0A68 06                 2828 	.db #0x06
+   0A69 04                 2829 	.db #0x04
+   0A6A 0C                 2830 	.db #0x0C
+   0A6B 04                 2831 	.db #0x04
+   0A6C 0C                 2832 	.db #0x0C
+   0A6D 04                 2833 	.db #0x04
+   0A6E 05                 2834 	.db #0x05
+   0A6F 02                 2835 	.db #0x02
+   0A70 05                 2836 	.db #0x05
+   0A71 03                 2837 	.db #0x03
+   0A72 0C                 2838 	.db #0x0C
+   0A73 04                 2839 	.db #0x04
+   0A74 04                 2840 	.db #0x04
+   0A75 08                 2841 	.db #0x08
+   0A76 40                 2842 	.db #0x40
+   0A77 80                 2843 	.db #0x80
+   0A78 60                 2844 	.db #0x60
+   0A79 40                 2845 	.db #0x40
+   0A7A 20                 2846 	.db #0x20
+   0A7B 40                 2847 	.db #0x40
+   0A7C 20                 2848 	.db #0x20
+   0A7D 40                 2849 	.db #0x40
+   0A7E C0                 2850 	.db #0xC0
+   0A7F 00                 2851 	.db #0x00
+   0A80 98                 2852 	.db #0x98
+   0A81 08                 2853 	.db #0x08
+   0A82 D8                 2854 	.db #0xD8
+   0A83 88                 2855 	.db #0x88
+   0A84 70                 2856 	.db #0x70
+   0A85 48                 2857 	.db #0x48
+   0A86 07                 2858 	.db #0x07
+   0A87 07                 2859 	.db #0x07
+   0A88 1F                 2860 	.db #0x1F
+   0A89 1F                 2861 	.db #0x1F
+   0A8A 3F                 2862 	.db #0x3F
+   0A8B 3F                 2863 	.db #0x3F
+   0A8C 38                 2864 	.db #0x38
+   0A8D 3D                 2865 	.db #0x3D
+   0A8E 38                 2866 	.db #0x38
+   0A8F 7A                 2867 	.db #0x7A
+   0A90 37                 2868 	.db #0x37
+   0A91 77                 2869 	.db #0x77
+   0A92 30                 2870 	.db #0x30
+   0A93 70                 2871 	.db #0x70
+   0A94 36                 2872 	.db #0x36
+   0A95 37                 2873 	.db #0x37
+   0A96 00                 2874 	.db #0x00
+   0A97 00                 2875 	.db #0x00
+   0A98 C0                 2876 	.db #0xC0
+   0A99 C0                 2877 	.db #0xC0
+   0A9A E0                 2878 	.db #0xE0
+   0A9B E0                 2879 	.db #0xE0
+   0A9C E0                 2880 	.db #0xE0
+   0A9D E0                 2881 	.db #0xE0
+   0A9E 60                 2882 	.db #0x60
+   0A9F F0                 2883 	.db #0xF0
+   0AA0 20                 2884 	.db #0x20
+   0AA1 70                 2885 	.db #0x70
+   0AA2 60                 2886 	.db #0x60
+   0AA3 30                 2887 	.db #0x30
+   0AA4 20                 2888 	.db #0x20
+   0AA5 60                 2889 	.db #0x60
+   0AA6 C2                 2890 	.db #0xC2
+   0AA7 81                 2891 	.db #0x81
+   0AA8 41                 2892 	.db #0x41
+   0AA9 82                 2893 	.db #0x82
+   0AAA 64                 2894 	.db #0x64
+   0AAB 42                 2895 	.db #0x42
+   0AAC 34                 2896 	.db #0x34
+   0AAD 18                 2897 	.db #0x18
+   0AAE 00                 2898 	.db #0x00
+   0AAF 00                 2899 	.db #0x00
+   0AB0 00                 2900 	.db #0x00
+   0AB1 00                 2901 	.db #0x00
+   0AB2 00                 2902 	.db #0x00
+   0AB3 00                 2903 	.db #0x00
+   0AB4 00                 2904 	.db #0x00
+   0AB5 00                 2905 	.db #0x00
+   0AB6 30                 2906 	.db #0x30
+   0AB7 20                 2907 	.db #0x20
+   0AB8 10                 2908 	.db #0x10
+   0AB9 20                 2909 	.db #0x20
+   0ABA 18                 2910 	.db #0x18
+   0ABB 10                 2911 	.db #0x10
+   0ABC 08                 2912 	.db #0x08
+   0ABD 07                 2913 	.db #0x07
+   0ABE 00                 2914 	.db #0x00
+   0ABF 00                 2915 	.db #0x00
+   0AC0 00                 2916 	.db #0x00
+   0AC1 00                 2917 	.db #0x00
+   0AC2 00                 2918 	.db #0x00
+   0AC3 00                 2919 	.db #0x00
+   0AC4 00                 2920 	.db #0x00
+   0AC5 00                 2921 	.db #0x00
+   0AC6 30                 2922 	.db #0x30
+   0AC7 20                 2923 	.db #0x20
+   0AC8 20                 2924 	.db #0x20
+   0AC9 20                 2925 	.db #0x20
+   0ACA 90                 2926 	.db #0x90
+   0ACB 21                 2927 	.db #0x21
+   0ACC 92                 2928 	.db #0x92
+   0ACD 0C                 2929 	.db #0x0C
+   0ACE 00                 2930 	.db #0x00
+   0ACF 00                 2931 	.db #0x00
+   0AD0 00                 2932 	.db #0x00
+   0AD1 00                 2933 	.db #0x00
+   0AD2 00                 2934 	.db #0x00
+   0AD3 00                 2935 	.db #0x00
+   0AD4 00                 2936 	.db #0x00
+   0AD5 00                 2937 	.db #0x00
+   0AD6 88                 2938 	.db #0x88
+   0AD7 84                 2939 	.db #0x84
+   0AD8 88                 2940 	.db #0x88
+   0AD9 84                 2941 	.db #0x84
+   0ADA 88                 2942 	.db #0x88
+   0ADB 84                 2943 	.db #0x84
+   0ADC 88                 2944 	.db #0x88
+   0ADD 84                 2945 	.db #0x84
+   0ADE 00                 2946 	.db #0x00
+   0ADF 00                 2947 	.db #0x00
+   0AE0 00                 2948 	.db #0x00
+   0AE1 00                 2949 	.db #0x00
+   0AE2 00                 2950 	.db #0x00
+   0AE3 00                 2951 	.db #0x00
+   0AE4 00                 2952 	.db #0x00
+   0AE5 00                 2953 	.db #0x00
+   0AE6 11                 2954 	.db #0x11
+   0AE7 08                 2955 	.db #0x08
+   0AE8 11                 2956 	.db #0x11
+   0AE9 08                 2957 	.db #0x08
+   0AEA 11                 2958 	.db #0x11
+   0AEB 08                 2959 	.db #0x08
+   0AEC 11                 2960 	.db #0x11
+   0AED 08                 2961 	.db #0x08
+   0AEE 00                 2962 	.db #0x00
+   0AEF 00                 2963 	.db #0x00
+   0AF0 00                 2964 	.db #0x00
+   0AF1 00                 2965 	.db #0x00
+   0AF2 00                 2966 	.db #0x00
+   0AF3 00                 2967 	.db #0x00
+   0AF4 00                 2968 	.db #0x00
+   0AF5 00                 2969 	.db #0x00
+   0AF6 06                 2970 	.db #0x06
+   0AF7 80                 2971 	.db #0x80
+   0AF8 06                 2972 	.db #0x06
+   0AF9 80                 2973 	.db #0x80
+   0AFA 06                 2974 	.db #0x06
+   0AFB 80                 2975 	.db #0x80
+   0AFC 06                 2976 	.db #0x06
+   0AFD 80                 2977 	.db #0x80
+   0AFE 00                 2978 	.db #0x00
+   0AFF 00                 2979 	.db #0x00
+   0B00 00                 2980 	.db #0x00
+   0B01 00                 2981 	.db #0x00
+   0B02 00                 2982 	.db #0x00
+   0B03 00                 2983 	.db #0x00
+   0B04 00                 2984 	.db #0x00
+   0B05 00                 2985 	.db #0x00
+   0B06 61                 2986 	.db #0x61
+   0B07 41                 2987 	.db #0x41
+   0B08 41                 2988 	.db #0x41
+   0B09 41                 2989 	.db #0x41
+   0B0A 21                 2990 	.db #0x21
+   0B0B 43                 2991 	.db #0x43
+   0B0C 25                 2992 	.db #0x25
+   0B0D 19                 2993 	.db #0x19
+   0B0E 00                 2994 	.db #0x00
+   0B0F 00                 2995 	.db #0x00
+   0B10 00                 2996 	.db #0x00
+   0B11 00                 2997 	.db #0x00
+   0B12 00                 2998 	.db #0x00
+   0B13 00                 2999 	.db #0x00
+   0B14 00                 3000 	.db #0x00
+   0B15 00                 3001 	.db #0x00
+   0B16 1C                 3002 	.db #0x1C
+   0B17 20                 3003 	.db #0x20
+   0B18 38                 3004 	.db #0x38
+   0B19 08                 3005 	.db #0x08
+   0B1A 30                 3006 	.db #0x30
+   0B1B 18                 3007 	.db #0x18
+   0B1C 18                 3008 	.db #0x18
+   0B1D 10                 3009 	.db #0x10
+   0B1E 00                 3010 	.db #0x00
+   0B1F 00                 3011 	.db #0x00
+   0B20 00                 3012 	.db #0x00
+   0B21 00                 3013 	.db #0x00
+   0B22 00                 3014 	.db #0x00
+   0B23 00                 3015 	.db #0x00
+   0B24 00                 3016 	.db #0x00
+   0B25 00                 3017 	.db #0x00
+   0B26 22                 3018 	.db #0x22
+   0B27 A1                 3019 	.db #0xA1
+   0B28 E2                 3020 	.db #0xE2
+   0B29 81                 3021 	.db #0x81
+   0B2A E2                 3022 	.db #0xE2
+   0B2B 41                 3023 	.db #0x41
+   0B2C 42                 3024 	.db #0x42
+   0B2D 41                 3025 	.db #0x41
+   0B2E 00                 3026 	.db #0x00
+   0B2F 00                 3027 	.db #0x00
+   0B30 00                 3028 	.db #0x00
+   0B31 00                 3029 	.db #0x00
+   0B32 00                 3030 	.db #0x00
+   0B33 00                 3031 	.db #0x00
+   0B34 00                 3032 	.db #0x00
+   0B35 00                 3033 	.db #0x00
+   0B36 20                 3034 	.db #0x20
+   0B37 10                 3035 	.db #0x10
+   0B38 30                 3036 	.db #0x30
+   0B39 10                 3037 	.db #0x10
+   0B3A 18                 3038 	.db #0x18
+   0B3B 10                 3039 	.db #0x10
+   0B3C 14                 3040 	.db #0x14
+   0B3D 0E                 3041 	.db #0x0E
+   0B3E 00                 3042 	.db #0x00
+   0B3F 00                 3043 	.db #0x00
+   0B40 00                 3044 	.db #0x00
+   0B41 00                 3045 	.db #0x00
+   0B42 00                 3046 	.db #0x00
+   0B43 00                 3047 	.db #0x00
+   0B44 00                 3048 	.db #0x00
+   0B45 00                 3049 	.db #0x00
+   0B46 83                 3050 	.db #0x83
+   0B47 40                 3051 	.db #0x40
+   0B48 83                 3052 	.db #0x83
+   0B49 40                 3053 	.db #0x40
+   0B4A 83                 3054 	.db #0x83
+   0B4B 40                 3055 	.db #0x40
+   0B4C 83                 3056 	.db #0x83
+   0B4D 40                 3057 	.db #0x40
+   0B4E 00                 3058 	.db #0x00
+   0B4F 00                 3059 	.db #0x00
+   0B50 00                 3060 	.db #0x00
+   0B51 00                 3061 	.db #0x00
+   0B52 00                 3062 	.db #0x00
+   0B53 00                 3063 	.db #0x00
+   0B54 00                 3064 	.db #0x00
+   0B55 00                 3065 	.db #0x00
+   0B56 90                 3066 	.db #0x90
+   0B57 F0                 3067 	.db #0xF0
+   0B58 F0                 3068 	.db #0xF0
+   0B59 90                 3069 	.db #0x90
+   0B5A E0                 3070 	.db #0xE0
+   0B5B F0                 3071 	.db #0xF0
+   0B5C E0                 3072 	.db #0xE0
+   0B5D 00                 3073 	.db #0x00
+   0B5E 00                 3074 	.db #0x00
+   0B5F 00                 3075 	.db #0x00
+   0B60 00                 3076 	.db #0x00
+   0B61 00                 3077 	.db #0x00
+   0B62 00                 3078 	.db #0x00
+   0B63 00                 3079 	.db #0x00
+   0B64 00                 3080 	.db #0x00
+   0B65 00                 3081 	.db #0x00
+   0B66 0C                 3082 	.db #0x0C
+   0B67 08                 3083 	.db #0x08
+   0B68 04                 3084 	.db #0x04
+   0B69 08                 3085 	.db #0x08
+   0B6A 0E                 3086 	.db #0x0E
+   0B6B 04                 3087 	.db #0x04
+   0B6C 01                 3088 	.db #0x01
+   0B6D 03                 3089 	.db #0x03
+   0B6E 00                 3090 	.db #0x00
+   0B6F 00                 3091 	.db #0x00
+   0B70 00                 3092 	.db #0x00
+   0B71 00                 3093 	.db #0x00
+   0B72 00                 3094 	.db #0x00
+   0B73 00                 3095 	.db #0x00
+   0B74 00                 3096 	.db #0x00
+   0B75 00                 3097 	.db #0x00
+   0B76 28                 3098 	.db #0x28
+   0B77 30                 3099 	.db #0x30
+   0B78 38                 3100 	.db #0x38
+   0B79 10                 3101 	.db #0x10
+   0B7A 44                 3102 	.db #0x44
+   0B7B 28                 3103 	.db #0x28
+   0B7C 46                 3104 	.db #0x46
+   0B7D 84                 3105 	.db #0x84
+   0B7E 00                 3106 	.db #0x00
+   0B7F 00                 3107 	.db #0x00
+   0B80 00                 3108 	.db #0x00
+   0B81 00                 3109 	.db #0x00
+   0B82 00                 3110 	.db #0x00
+   0B83 00                 3111 	.db #0x00
+   0B84 00                 3112 	.db #0x00
+   0B85 00                 3113 	.db #0x00
+   0B86 1F                 3114 	.db #0x1F
+   0B87 3F                 3115 	.db #0x3F
+   0B88 0F                 3116 	.db #0x0F
+   0B89 1F                 3117 	.db #0x1F
+   0B8A 00                 3118 	.db #0x00
+   0B8B 07                 3119 	.db #0x07
+   0B8C 00                 3120 	.db #0x00
+   0B8D 00                 3121 	.db #0x00
+   0B8E 00                 3122 	.db #0x00
+   0B8F 00                 3123 	.db #0x00
+   0B90 00                 3124 	.db #0x00
+   0B91 00                 3125 	.db #0x00
+   0B92 00                 3126 	.db #0x00
+   0B93 00                 3127 	.db #0x00
+   0B94 00                 3128 	.db #0x00
+   0B95 00                 3129 	.db #0x00
+   0B96 C0                 3130 	.db #0xC0
+   0B97 E0                 3131 	.db #0xE0
+   0B98 80                 3132 	.db #0x80
+   0B99 C0                 3133 	.db #0xC0
+   0B9A 00                 3134 	.db #0x00
+   0B9B 00                 3135 	.db #0x00
+   0B9C 00                 3136 	.db #0x00
+   0B9D 00                 3137 	.db #0x00
+   0B9E 00                 3138 	.db #0x00
+   0B9F 00                 3139 	.db #0x00
+   0BA0 00                 3140 	.db #0x00
+   0BA1 00                 3141 	.db #0x00
+   0BA2 00                 3142 	.db #0x00
+   0BA3 00                 3143 	.db #0x00
+   0BA4 00                 3144 	.db #0x00
+   0BA5 00                 3145 	.db #0x00
+   0BA6                    3146 _ocarinagb_map:
+   0BA6 00                 3147 	.db #0x00
+   0BA7 00                 3148 	.db #0x00
+   0BA8 00                 3149 	.db #0x00
+   0BA9 00                 3150 	.db #0x00
+   0BAA 00                 3151 	.db #0x00
+   0BAB 00                 3152 	.db #0x00
+   0BAC 00                 3153 	.db #0x00
+   0BAD 00                 3154 	.db #0x00
+   0BAE 00                 3155 	.db #0x00
+   0BAF 00                 3156 	.db #0x00
+   0BB0 01                 3157 	.db #0x01
+   0BB1 02                 3158 	.db #0x02
+   0BB2 03                 3159 	.db #0x03
+   0BB3 04                 3160 	.db #0x04
+   0BB4 05                 3161 	.db #0x05
+   0BB5 00                 3162 	.db #0x00
+   0BB6 00                 3163 	.db #0x00
+   0BB7 00                 3164 	.db #0x00
+   0BB8 00                 3165 	.db #0x00
+   0BB9 00                 3166 	.db #0x00
+   0BBA 06                 3167 	.db #0x06
+   0BBB 07                 3168 	.db #0x07
+   0BBC 00                 3169 	.db #0x00
+   0BBD 00                 3170 	.db #0x00
+   0BBE 00                 3171 	.db #0x00
+   0BBF 00                 3172 	.db #0x00
+   0BC0 00                 3173 	.db #0x00
+   0BC1 00                 3174 	.db #0x00
+   0BC2 08                 3175 	.db #0x08
+   0BC3 09                 3176 	.db #0x09
+   0BC4 0A                 3177 	.db #0x0A
+   0BC5 0B                 3178 	.db #0x0B
+   0BC6 0C                 3179 	.db #0x0C
+   0BC7 0D                 3180 	.db #0x0D
+   0BC8 0E                 3181 	.db #0x0E
+   0BC9 00                 3182 	.db #0x00
+   0BCA 00                 3183 	.db #0x00
+   0BCB 00                 3184 	.db #0x00
+   0BCC 00                 3185 	.db #0x00
+   0BCD 00                 3186 	.db #0x00
+   0BCE 0F                 3187 	.db #0x0F
+   0BCF 10                 3188 	.db #0x10
+   0BD0 11                 3189 	.db #0x11
+   0BD1 12                 3190 	.db #0x12
+   0BD2 00                 3191 	.db #0x00
+   0BD3 00                 3192 	.db #0x00
+   0BD4 13                 3193 	.db #0x13
+   0BD5 14                 3194 	.db #0x14
+   0BD6 15                 3195 	.db #0x15
+   0BD7 16                 3196 	.db #0x16
+   0BD8 17                 3197 	.db #0x17
+   0BD9 18                 3198 	.db #0x18
+   0BDA 19                 3199 	.db #0x19
+   0BDB 1A                 3200 	.db #0x1A
+   0BDC 1B                 3201 	.db #0x1B
+   0BDD 00                 3202 	.db #0x00
+   0BDE 00                 3203 	.db #0x00
+   0BDF 00                 3204 	.db #0x00
+   0BE0 00                 3205 	.db #0x00
+   0BE1 00                 3206 	.db #0x00
+   0BE2 1C                 3207 	.db #0x1C
+   0BE3 1D                 3208 	.db #0x1D
+   0BE4 1E                 3209 	.db #0x1E
+   0BE5 1F                 3210 	.db #0x1F
+   0BE6 20                 3211 	.db #0x20
+   0BE7 21                 3212 	.db #0x21
+   0BE8 22                 3213 	.db #0x22
+   0BE9 23                 3214 	.db #0x23
+   0BEA 24                 3215 	.db #0x24
+   0BEB 25                 3216 	.db #0x25
+   0BEC 26                 3217 	.db #0x26
+   0BED 27                 3218 	.db #0x27
+   0BEE 28                 3219 	.db #0x28
+   0BEF 29                 3220 	.db #0x29
+   0BF0 00                 3221 	.db #0x00
+   0BF1 00                 3222 	.db #0x00
+   0BF2 00                 3223 	.db #0x00
+   0BF3 00                 3224 	.db #0x00
+   0BF4 00                 3225 	.db #0x00
+   0BF5 00                 3226 	.db #0x00
+   0BF6 00                 3227 	.db #0x00
+   0BF7 2A                 3228 	.db #0x2A
+   0BF8 2B                 3229 	.db #0x2B
+   0BF9 2C                 3230 	.db #0x2C
+   0BFA 2D                 3231 	.db #0x2D
+   0BFB 2E                 3232 	.db #0x2E
+   0BFC 2F                 3233 	.db #0x2F
+   0BFD 30                 3234 	.db #0x30
+   0BFE 31                 3235 	.db #0x31
+   0BFF 32                 3236 	.db #0x32
+   0C00 33                 3237 	.db #0x33
+   0C01 34                 3238 	.db #0x34
+   0C02 35                 3239 	.db #0x35
+   0C03 36                 3240 	.db #0x36
+   0C04 00                 3241 	.db #0x00
+   0C05 00                 3242 	.db #0x00
+   0C06 00                 3243 	.db #0x00
+   0C07 00                 3244 	.db #0x00
+   0C08 00                 3245 	.db #0x00
+   0C09 00                 3246 	.db #0x00
+   0C0A 00                 3247 	.db #0x00
+   0C0B 37                 3248 	.db #0x37
+   0C0C 38                 3249 	.db #0x38
+   0C0D 39                 3250 	.db #0x39
+   0C0E 3A                 3251 	.db #0x3A
+   0C0F 3B                 3252 	.db #0x3B
+   0C10 3C                 3253 	.db #0x3C
+   0C11 3D                 3254 	.db #0x3D
+   0C12 3E                 3255 	.db #0x3E
+   0C13 3F                 3256 	.db #0x3F
+   0C14 40                 3257 	.db #0x40
+   0C15 41                 3258 	.db #0x41
+   0C16 42                 3259 	.db #0x42
+   0C17 00                 3260 	.db #0x00
+   0C18 00                 3261 	.db #0x00
+   0C19 00                 3262 	.db #0x00
+   0C1A 00                 3263 	.db #0x00
+   0C1B 00                 3264 	.db #0x00
+   0C1C 00                 3265 	.db #0x00
+   0C1D 00                 3266 	.db #0x00
+   0C1E 00                 3267 	.db #0x00
+   0C1F 00                 3268 	.db #0x00
+   0C20 43                 3269 	.db #0x43
+   0C21 44                 3270 	.db #0x44
+   0C22 45                 3271 	.db #0x45
+   0C23 46                 3272 	.db #0x46
+   0C24 47                 3273 	.db #0x47
+   0C25 48                 3274 	.db #0x48
+   0C26 49                 3275 	.db #0x49
+   0C27 4A                 3276 	.db #0x4A
+   0C28 41                 3277 	.db #0x41
+   0C29 4B                 3278 	.db #0x4B
+   0C2A 00                 3279 	.db #0x00
+   0C2B 00                 3280 	.db #0x00
+   0C2C 00                 3281 	.db #0x00
+   0C2D 00                 3282 	.db #0x00
+   0C2E 00                 3283 	.db #0x00
+   0C2F 00                 3284 	.db #0x00
+   0C30 00                 3285 	.db #0x00
+   0C31 00                 3286 	.db #0x00
+   0C32 00                 3287 	.db #0x00
+   0C33 4C                 3288 	.db #0x4C
+   0C34 4D                 3289 	.db #0x4D
+   0C35 4E                 3290 	.db #0x4E
+   0C36 4F                 3291 	.db #0x4F
+   0C37 50                 3292 	.db #0x50
+   0C38 51                 3293 	.db #0x51
+   0C39 52                 3294 	.db #0x52
+   0C3A 53                 3295 	.db #0x53
+   0C3B 41                 3296 	.db #0x41
+   0C3C 54                 3297 	.db #0x54
+   0C3D 55                 3298 	.db #0x55
+   0C3E 00                 3299 	.db #0x00
+   0C3F 00                 3300 	.db #0x00
+   0C40 00                 3301 	.db #0x00
+   0C41 00                 3302 	.db #0x00
+   0C42 00                 3303 	.db #0x00
+   0C43 00                 3304 	.db #0x00
+   0C44 00                 3305 	.db #0x00
+   0C45 00                 3306 	.db #0x00
+   0C46 00                 3307 	.db #0x00
+   0C47 56                 3308 	.db #0x56
+   0C48 3E                 3309 	.db #0x3E
+   0C49 57                 3310 	.db #0x57
+   0C4A 58                 3311 	.db #0x58
+   0C4B 59                 3312 	.db #0x59
+   0C4C 5A                 3313 	.db #0x5A
+   0C4D 5B                 3314 	.db #0x5B
+   0C4E 5C                 3315 	.db #0x5C
+   0C4F 5D                 3316 	.db #0x5D
+   0C50 5E                 3317 	.db #0x5E
+   0C51 00                 3318 	.db #0x00
+   0C52 00                 3319 	.db #0x00
+   0C53 00                 3320 	.db #0x00
+   0C54 00                 3321 	.db #0x00
+   0C55 00                 3322 	.db #0x00
+   0C56 00                 3323 	.db #0x00
+   0C57 00                 3324 	.db #0x00
+   0C58 00                 3325 	.db #0x00
+   0C59 00                 3326 	.db #0x00
+   0C5A 5F                 3327 	.db #0x5F
+   0C5B 60                 3328 	.db #0x60
+   0C5C 61                 3329 	.db #0x61
+   0C5D 62                 3330 	.db #0x62
+   0C5E 63                 3331 	.db #0x63
+   0C5F 64                 3332 	.db #0x64
+   0C60 65                 3333 	.db #0x65
+   0C61 41                 3334 	.db #0x41
+   0C62 66                 3335 	.db #0x66
+   0C63 67                 3336 	.db #0x67
+   0C64 00                 3337 	.db #0x00
+   0C65 00                 3338 	.db #0x00
+   0C66 00                 3339 	.db #0x00
+   0C67 00                 3340 	.db #0x00
+   0C68 00                 3341 	.db #0x00
+   0C69 00                 3342 	.db #0x00
+   0C6A 00                 3343 	.db #0x00
+   0C6B 00                 3344 	.db #0x00
+   0C6C 00                 3345 	.db #0x00
+   0C6D 00                 3346 	.db #0x00
+   0C6E 68                 3347 	.db #0x68
+   0C6F 69                 3348 	.db #0x69
+   0C70 6A                 3349 	.db #0x6A
+   0C71 6B                 3350 	.db #0x6B
+   0C72 6C                 3351 	.db #0x6C
+   0C73 6D                 3352 	.db #0x6D
+   0C74 6E                 3353 	.db #0x6E
+   0C75 6F                 3354 	.db #0x6F
+   0C76 70                 3355 	.db #0x70
+   0C77 00                 3356 	.db #0x00
+   0C78 00                 3357 	.db #0x00
+   0C79 00                 3358 	.db #0x00
+   0C7A 00                 3359 	.db #0x00
+   0C7B 00                 3360 	.db #0x00
+   0C7C 00                 3361 	.db #0x00
+   0C7D 00                 3362 	.db #0x00
+   0C7E 00                 3363 	.db #0x00
+   0C7F 00                 3364 	.db #0x00
+   0C80 00                 3365 	.db #0x00
+   0C81 00                 3366 	.db #0x00
+   0C82 00                 3367 	.db #0x00
+   0C83 71                 3368 	.db #0x71
+   0C84 72                 3369 	.db #0x72
+   0C85 73                 3370 	.db #0x73
+   0C86 74                 3371 	.db #0x74
+   0C87 75                 3372 	.db #0x75
+   0C88 76                 3373 	.db #0x76
+   0C89 00                 3374 	.db #0x00
+   0C8A 00                 3375 	.db #0x00
+   0C8B 00                 3376 	.db #0x00
+   0C8C 00                 3377 	.db #0x00
+   0C8D 00                 3378 	.db #0x00
+   0C8E 00                 3379 	.db #0x00
+   0C8F 00                 3380 	.db #0x00
+   0C90 00                 3381 	.db #0x00
+   0C91 00                 3382 	.db #0x00
+   0C92 00                 3383 	.db #0x00
+   0C93 00                 3384 	.db #0x00
+   0C94 00                 3385 	.db #0x00
+   0C95 00                 3386 	.db #0x00
+   0C96 00                 3387 	.db #0x00
+   0C97 77                 3388 	.db #0x77
+   0C98 78                 3389 	.db #0x78
+   0C99 79                 3390 	.db #0x79
+   0C9A 7A                 3391 	.db #0x7A
+   0C9B 7B                 3392 	.db #0x7B
+   0C9C 7C                 3393 	.db #0x7C
+   0C9D 7D                 3394 	.db #0x7D
+   0C9E 7E                 3395 	.db #0x7E
+   0C9F 00                 3396 	.db #0x00
+   0CA0 00                 3397 	.db #0x00
+   0CA1 00                 3398 	.db #0x00
+   0CA2 00                 3399 	.db #0x00
+   0CA3 00                 3400 	.db #0x00
+   0CA4 00                 3401 	.db #0x00
+   0CA5 00                 3402 	.db #0x00
+   0CA6 00                 3403 	.db #0x00
+   0CA7 00                 3404 	.db #0x00
+   0CA8 00                 3405 	.db #0x00
+   0CA9 00                 3406 	.db #0x00
+   0CAA 00                 3407 	.db #0x00
+   0CAB 7F                 3408 	.db #0x7F
+   0CAC 80                 3409 	.db #0x80
+   0CAD 81                 3410 	.db #0x81
+   0CAE 82                 3411 	.db #0x82
+   0CAF 83                 3412 	.db #0x83
+   0CB0 84                 3413 	.db #0x84
+   0CB1 85                 3414 	.db #0x85
+   0CB2 86                 3415 	.db #0x86
+   0CB3 00                 3416 	.db #0x00
+   0CB4 00                 3417 	.db #0x00
+   0CB5 00                 3418 	.db #0x00
+   0CB6 00                 3419 	.db #0x00
+   0CB7 00                 3420 	.db #0x00
+   0CB8 00                 3421 	.db #0x00
+   0CB9 00                 3422 	.db #0x00
+   0CBA 00                 3423 	.db #0x00
+   0CBB 00                 3424 	.db #0x00
+   0CBC 00                 3425 	.db #0x00
+   0CBD 00                 3426 	.db #0x00
+   0CBE 00                 3427 	.db #0x00
+   0CBF 87                 3428 	.db #0x87
+   0CC0 00                 3429 	.db #0x00
+   0CC1 00                 3430 	.db #0x00
+   0CC2 88                 3431 	.db #0x88
+   0CC3 00                 3432 	.db #0x00
+   0CC4 00                 3433 	.db #0x00
+   0CC5 00                 3434 	.db #0x00
+   0CC6 00                 3435 	.db #0x00
+   0CC7 00                 3436 	.db #0x00
+   0CC8 00                 3437 	.db #0x00
+   0CC9 00                 3438 	.db #0x00
+   0CCA 89                 3439 	.db #0x89
+   0CCB 00                 3440 	.db #0x00
+   0CCC 00                 3441 	.db #0x00
+   0CCD 00                 3442 	.db #0x00
+   0CCE 00                 3443 	.db #0x00
+   0CCF 00                 3444 	.db #0x00
+   0CD0 00                 3445 	.db #0x00
+   0CD1 00                 3446 	.db #0x00
+   0CD2 00                 3447 	.db #0x00
+   0CD3 8A                 3448 	.db #0x8A
+   0CD4 8B                 3449 	.db #0x8B
+   0CD5 8C                 3450 	.db #0x8C
+   0CD6 8D                 3451 	.db #0x8D
+   0CD7 8E                 3452 	.db #0x8E
+   0CD8 8F                 3453 	.db #0x8F
+   0CD9 90                 3454 	.db #0x90
+   0CDA 00                 3455 	.db #0x00
+   0CDB 91                 3456 	.db #0x91
+   0CDC 92                 3457 	.db #0x92
+   0CDD 93                 3458 	.db #0x93
+   0CDE 94                 3459 	.db #0x94
+   0CDF 95                 3460 	.db #0x95
+   0CE0 96                 3461 	.db #0x96
+   0CE1 97                 3462 	.db #0x97
+   0CE2 98                 3463 	.db #0x98
+   0CE3 99                 3464 	.db #0x99
+   0CE4 9A                 3465 	.db #0x9A
+   0CE5 00                 3466 	.db #0x00
+   0CE6 00                 3467 	.db #0x00
+   0CE7 9B                 3468 	.db #0x9B
+   0CE8 9C                 3469 	.db #0x9C
+   0CE9 9D                 3470 	.db #0x9D
+   0CEA 9E                 3471 	.db #0x9E
+   0CEB 9F                 3472 	.db #0x9F
+   0CEC A0                 3473 	.db #0xA0
+   0CED A1                 3474 	.db #0xA1
+   0CEE 00                 3475 	.db #0x00
+   0CEF A2                 3476 	.db #0xA2
+   0CF0 A3                 3477 	.db #0xA3
+   0CF1 A4                 3478 	.db #0xA4
+   0CF2 A5                 3479 	.db #0xA5
+   0CF3 00                 3480 	.db #0x00
+   0CF4 A6                 3481 	.db #0xA6
+   0CF5 A7                 3482 	.db #0xA7
+   0CF6 A8                 3483 	.db #0xA8
+   0CF7 A9                 3484 	.db #0xA9
+   0CF8 AA                 3485 	.db #0xAA
+   0CF9 00                 3486 	.db #0x00
+   0CFA 00                 3487 	.db #0x00
+   0CFB 00                 3488 	.db #0x00
+   0CFC 00                 3489 	.db #0x00
+   0CFD 00                 3490 	.db #0x00
+   0CFE 00                 3491 	.db #0x00
+   0CFF 00                 3492 	.db #0x00
+   0D00 00                 3493 	.db #0x00
+   0D01 00                 3494 	.db #0x00
+   0D02 00                 3495 	.db #0x00
+   0D03 00                 3496 	.db #0x00
+   0D04 00                 3497 	.db #0x00
+   0D05 00                 3498 	.db #0x00
+   0D06 00                 3499 	.db #0x00
+   0D07 00                 3500 	.db #0x00
+   0D08 00                 3501 	.db #0x00
+   0D09 00                 3502 	.db #0x00
+   0D0A 00                 3503 	.db #0x00
+   0D0B 00                 3504 	.db #0x00
+   0D0C 00                 3505 	.db #0x00
+   0D0D 00                 3506 	.db #0x00
+                           3507 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    _BCPD_REG                          **** GX
+    _BCPS_REG                          **** GX
+    _BGP_REG                           **** GX
+    _DIV_REG                           **** GX
+    _DMA_REG                           **** GX
+    _HDMA1_REG                         **** GX
+    _HDMA2_REG                         **** GX
+    _HDMA3_REG                         **** GX
+    _HDMA4_REG                         **** GX
+    _HDMA5_REG                         **** GX
+    _IE_REG                            **** GX
+    _IF_REG                            **** GX
+    _KEY1_REG                          **** GX
+    _LCDC_REG                          **** GX
+    _LYC_REG                           **** GX
+    _LY_REG                            **** GX
+    _NR10_REG                          **** GX
+    _NR11_REG                          **** GX
+    _NR12_REG                          **** GX
+    _NR13_REG                          **** GX
+    _NR14_REG                          **** GX
+    _NR21_REG                          **** GX
+    _NR22_REG                          **** GX
+    _NR23_REG                          **** GX
+    _NR24_REG                          **** GX
+    _NR30_REG                          **** GX
+    _NR31_REG                          **** GX
+    _NR32_REG                          **** GX
+    _NR33_REG                          **** GX
+    _NR34_REG                          **** GX
+    _NR41_REG                          **** GX
+    _NR42_REG                          **** GX
+    _NR43_REG                          **** GX
+    _NR44_REG                          **** GX
+    _NR50_REG                          **** GX
+    _NR51_REG                          **** GX
+    _NR52_REG                          **** GX
+    _OBP0_REG                          **** GX
+    _OBP1_REG                          **** GX
+    _OCPD_REG                          **** GX
+    _OCPS_REG                          **** GX
+    _P1_REG                            **** GX
+    _RP_REG                            **** GX
+    _SB_REG                            **** GX
+    _SCX_REG                           **** GX
+    _SCY_REG                           **** GX
+    _SC_REG                            **** GX
+    _STAT_REG                          **** GX
+    _SVBK_REG                          **** GX
+    _TAC_REG                           **** GX
+    _TIMA_REG                          **** GX
+    _TMA_REG                           **** GX
+    _VBK_REG                           **** GX
+    _WX_REG                            **** GX
+    _WY_REG                            **** GX
+  0 ___main_end                        00F6 R
+  0 ___main_start                      0000 R
+    __cpu                              **** GX
+    __io_in                            **** GX
+    __io_out                           **** GX
+    __io_status                        **** GX
+    _joypad                            **** GX
+  0 _main                              0000 GR
+  0 _ocarinagb_data                    00F6 GR
+  0 _ocarinagb_map                     0BA6 GR
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _sys_time                          **** GX
+    _wait_vbl_done                     **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  D0E   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0
